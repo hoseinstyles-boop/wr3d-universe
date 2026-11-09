@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="data:," />
+    <title>WR3D Universe</title>
+    <meta name="description" content="WR3D Universe — شوهای بوکینگ Wrestling Empire؛ نتایج شوها و قهرمانان فعلی" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0a0a0c;
+        --bg-2: #101013;
+        --panel: #141417;
+        --panel-2: #1a1a1f;
+        --line: #26262c;
+        --line-soft: #1e1e23;
+        --red: #e1061a;
+        --red-dark: #8f0410;
+        --red-soft: rgba(225, 6, 26, 0.12);
+        --gold: #d4a017;
+        --gold-soft: rgba(212, 160, 23, 0.12);
+        --text: #f4f4f2;
+        --muted: #a9a9b1;
+        --muted-2: #76767f;
+        --radius: 14px;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Vazirmatn", "Archivo", system-ui, sans-serif;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+      .en, .num { font-family: "Archivo", "Vazirmatn", sans-serif; }
+      .display { font-family: "Oswald", "Archivo", sans-serif; }
+      a { color: inherit; }
+      img { max-width: 100%; display: block; }
+      ::selection { background: var(--red); color: #fff; }
+
+      .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- top bar ---------- */
+      .topbar {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(10, 10, 12, 0.88);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .topbar-in {
+        display: flex; align-items: center; gap: 22px;
+        height: 62px;
+      }
+      .brand {
+        font-family: "Oswald", sans-serif; font-weight: 700;
+        font-size: 21px; letter-spacing: 0.06em; text-decoration: none;
+        white-space: nowrap; direction: ltr;
+      }
+      .brand b { color: var(--red); font-weight: 700; }
+      .brand span { color: var(--text); }
+      .nav { display: flex; gap: 4px; margin-inline-start: auto; }
+      .nav a {
+        text-decoration: none; color: var(--muted); font-size: 14.5px; font-weight: 500;
+        padding: 7px 12px; border-radius: 8px; transition: color .15s, background .15s;
+      }
+      .nav a:hover { color: var(--text); background: var(--panel-2); }
+      .btn-rubika {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--red); color: #fff; text-decoration: none;
+        font-weight: 700; font-size: 14.5px; padding: 8px 16px; border-radius: 9px;
+        white-space: nowrap; transition: background .15s, transform .15s;
+      }
+      .btn-rubika:hover { background: #f2172a; }
+      .btn-rubika svg { width: 16px; height: 16px; flex: none; }
+      @media (max-width: 720px) {
+        .nav { display: none; }
+        .topbar-in { justify-content: space-between; }
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        position: relative; overflow: hidden; direction: ltr;
+        border-bottom: 3px solid var(--red);
+      }
+      .hero img.bg {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; object-position: center 38%;
+      }
+      .hero::after {
+        content: ""; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(10,10,12,.42) 0%, rgba(10,10,12,.18) 40%, rgba(10,10,12,.92) 100%);
+      }
+      .hero-in {
+        position: relative; z-index: 2; direction: rtl;
+        padding: 92px 0 64px; text-align: center;
+      }
+      .hero-badge {
+        display: inline-block; direction: ltr;
+        font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 700;
+        letter-spacing: 0.32em; color: #ffb3ba;
+        border: 1px solid rgba(255,255,255,.28); border-radius: 999px;
+        padding: 6px 16px 6px 19px; margin-bottom: 22px;
+        background: rgba(10,10,12,.45);
+      }
+      .hero h1 {
+        margin: 0; direction: ltr;
+        font-family: "Oswald", sans-serif; font-weight: 700;
+        font-size: clamp(52px, 11vw, 118px); line-height: 0.98;
+        letter-spacing: 0.015em; text-transform: uppercase;
+        text-shadow: 0 6px 34px rgba(0,0,0,.75);
+      }
+      .hero h1 .u { color: var(--red); }
+      .hero .tagline {
+        direction: ltr; margin: 20px auto 6px; max-width: 640px;
+        font-family: "Archivo", sans-serif; font-weight: 800;
+        font-size: clamp(13px, 2.4vw, 17px); letter-spacing: 0.14em;
+        color: #ffd9dc; text-transform: uppercase;
+      }
+      .hero .sub {
+        margin: 10px auto 0; max-width: 560px; color: #e8e8ea;
+        font-size: clamp(15px, 2.6vw, 18px); font-weight: 500;
+        text-shadow: 0 2px 12px rgba(0,0,0,.8);
+      }
+      .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 9px;
+        text-decoration: none; font-weight: 700; font-size: 15.5px;
+        padding: 13px 26px; border-radius: 10px; transition: transform .15s, background .15s, border-color .15s;
+      }
+      .btn:active { transform: scale(.98); }
+      .btn-red { background: var(--red); color: #fff; box-shadow: 0 10px 30px rgba(225,6,26,.35); }
+      .btn-red:hover { background: #f2172a; }
+      .btn-ghost { background: rgba(10,10,12,.55); color: #fff; border: 1px solid rgba(255,255,255,.35); }
+      .btn-ghost:hover { border-color: #fff; }
+      .btn svg { width: 17px; height: 17px; }
+
+      /* ---------- ticker ---------- */
+      .ticker {
+        background: var(--red-dark); border-bottom: 1px solid rgba(255,255,255,.14);
+        overflow: hidden; direction: ltr;
+      }
+      .ticker-track {
+        display: flex; gap: 0; width: max-content;
+        animation: tick 46s linear infinite; padding: 9px 0;
+      }
+      .ticker:hover .ticker-track { animation-play-state: paused; }
+      .ticker span {
+        font-family: "Archivo", sans-serif; font-size: 13px; font-weight: 700;
+        letter-spacing: 0.08em; color: #ffe9eb; white-space: nowrap; padding: 0 14px;
+        text-transform: uppercase;
+      }
+      .ticker i { color: #ff8f99; font-style: normal; }
+      @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      @media (prefers-reduced-motion: reduce) {
+        .ticker-track { animation: none; flex-wrap: wrap; width: auto; }
+        html { scroll-behavior: auto; }
+      }
+
+      /* ---------- sections ---------- */
+      section { padding: 74px 0 8px; }
+      .sec-head { display: flex; align-items: flex-end; gap: 18px; margin-bottom: 30px; flex-wrap: wrap; }
+      .sec-head .kick {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.3em; color: var(--red); text-transform: uppercase; margin-bottom: 4px;
+      }
+      .sec-head h2 { margin: 0; font-size: clamp(26px, 4.6vw, 36px); font-weight: 800; line-height: 1.25; }
+      .sec-head p { margin: 0; color: var(--muted); max-width: 520px; font-size: 15.5px; }
+      .sec-head .side { margin-inline-start: auto; }
+
+      /* ---------- results ---------- */
+      .nights { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      @media (max-width: 860px) { .nights { grid-template-columns: 1fr; } }
+      .night {
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); overflow: hidden;
+      }
+      .night-head {
+        display: flex; align-items: center; gap: 12px;
+        padding: 18px 22px; background: var(--panel-2);
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .night-head .n {
+        direction: ltr; font-family: "Oswald", sans-serif; font-weight: 700;
+        font-size: 15px; letter-spacing: 0.1em; color: #fff;
+        background: var(--red); border-radius: 7px; padding: 4px 12px;
+      }
+      .night-head h3 { margin: 0; font-size: 19px; font-weight: 800; }
+      .night-head .en-name {
+        direction: ltr; font-family: "Archivo", sans-serif; color: var(--muted-2);
+        font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+        margin-inline-start: auto;
+      }
+      .match { padding: 17px 22px; border-bottom: 1px solid var(--line-soft); }
+      .match:last-child { border-bottom: 0; }
+      .match .vs { direction: ltr; text-align: left; font-family: "Archivo", sans-serif; font-size: 16.5px; line-height: 1.45; }
+      .match .vs .w { font-weight: 800; color: #fff; }
+      .match .vs .l { font-weight: 500; color: var(--muted); }
+      .match .vs .def { color: var(--muted-2); font-size: 13px; font-weight: 600; letter-spacing: .06em; }
+      .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 9px; }
+      .tag {
+        font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2.5px 11px;
+        border: 1px solid var(--line); color: var(--muted); background: var(--bg-2);
+      }
+      .tag.title { color: #ffd968; border-color: rgba(212,160,23,.45); background: var(--gold-soft); }
+      .tag.stip { color: #ff9aa4; border-color: rgba(225,6,26,.45); background: var(--red-soft); }
+      .tag.new { color: #8be89b; border-color: rgba(80,200,110,.4); background: rgba(80,200,110,.1); }
+
+      /* spoiler shot — small visual spoiler inside a match, kept compact */
+      .spoiler-shot { margin: 12px 0 0; max-width: 236px; }
+      .spoiler-shot a { display: block; }
+      .spoiler-shot img {
+        width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+        border-radius: 8px; border: 1px solid var(--line);
+      }
+      .spoiler-shot figcaption { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--muted-2); line-height: 1.5; }
+
+      .storyline {
+        margin-top: 22px; background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); padding: 22px 24px;
+        display: flex; gap: 18px; align-items: flex-start;
+      }
+      .storyline .mark {
+        flex: none; width: 42px; height: 42px; border-radius: 10px;
+        background: var(--red-soft); border: 1px solid rgba(225,6,26,.4);
+        display: grid; place-items: center; color: var(--red);
+      }
+      .storyline .mark svg { width: 21px; height: 21px; }
+      .storyline h3 { margin: 0 0 4px; font-size: 17.5px; font-weight: 800; }
+      .storyline p { margin: 0; color: var(--muted); font-size: 15px; }
+
+      /* ---------- next event ---------- */
+      .next-event {
+        position: relative; overflow: hidden;
+        background:
+          repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, transparent 1px 34px),
+          repeating-linear-gradient(90deg, rgba(255,255,255,.028) 0 1px, transparent 1px 34px),
+          linear-gradient(150deg, #17171c 0%, #0d0d10 60%);
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--red);
+        border-radius: var(--radius);
+        padding: 34px 30px 30px;
+      }
+      .next-event .kick {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.3em; color: var(--red); text-transform: uppercase; margin-bottom: 6px;
+      }
+      .next-event .fa-title { margin: 0 0 8px; font-size: clamp(24px, 4.2vw, 32px); font-weight: 800; line-height: 1.3; }
+      .next-event .big {
+        direction: ltr; margin: 0;
+        font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase;
+        font-size: clamp(34px, 6.4vw, 58px); line-height: 1.04; letter-spacing: 0.01em;
+      }
+      .next-event .big .u { color: var(--red); }
+      .next-event .lead {
+        margin: 14px 0 0; max-width: 640px; color: var(--muted); font-size: 16px;
+      }
+      .next-event .lead b { color: var(--text); }
+      .stakes {
+        margin: 26px 0 0; padding: 20px 0 0; border-top: 1px dashed var(--line);
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px 22px;
+        list-style: none;
+      }
+      .stakes .s-title {
+        direction: ltr; text-align: right; font-family: "Archivo", sans-serif;
+        font-size: 11.5px; font-weight: 800; letter-spacing: 0.14em;
+        color: var(--gold); text-transform: uppercase;
+      }
+      .stakes .s-holder { font-weight: 700; font-size: 15px; margin-top: 2px; }
+      .next-event .cta-row { margin-top: 26px; }
+
+      /* ---------- champions ---------- */
+      .champs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+      .champ {
+        grid-column: span 2; background: var(--panel);
+        border: 1px solid var(--line-soft); border-radius: var(--radius);
+        padding: 26px 22px 22px; text-align: center; position: relative; overflow: hidden;
+      }
+      .champ.wide { grid-column: span 3; }
+      .champ::before {
+        content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      }
+      .champ .belt { width: 92px; margin: 0 auto 14px; color: var(--gold); }
+      .champ .belt svg { width: 100%; height: auto; }
+      .champ .title-name {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 7px;
+      }
+      .champ h3 { direction: ltr; margin: 0; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 24px; letter-spacing: 0.02em; line-height: 1.2; }
+      .champ .fa-name { color: var(--muted); font-size: 14.5px; margin-top: 3px; }
+      .champ .defense { margin-top: 13px; font-size: 13px; color: var(--muted-2); border-top: 1px dashed var(--line); padding-top: 12px; }
+      .champ .defense b { color: var(--muted); font-weight: 600; }
+      @media (max-width: 860px) {
+        .champs { grid-template-columns: 1fr 1fr; }
+        .champ, .champ.wide { grid-column: span 1; }
+        .champ:last-child { grid-column: span 2; }
+      }
+      @media (max-width: 520px) {
+        .champs { grid-template-columns: 1fr; }
+        .champ, .champ.wide, .champ:last-child { grid-column: span 1; }
+      }
+
+      /* ---------- about / channel ---------- */
+      .about-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 22px; align-items: stretch; }
+      @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+      .about-card, .channel-card {
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); padding: 28px;
+      }
+      .about-card h3 { margin: 0 0 10px; font-size: 20px; font-weight: 800; }
+      .about-card p { margin: 0 0 12px; color: var(--muted); font-size: 15.5px; }
+      .about-card p:last-child { margin-bottom: 0; }
+      .about-card b { color: var(--text); }
+      .facts { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 20px; padding-top: 18px; border-top: 1px dashed var(--line); }
+      .fact .v { direction: ltr; font-family: "Oswald", sans-serif; font-size: 27px; font-weight: 700; color: #fff; line-height: 1.1; text-align: center; }
+      .fact .k { color: var(--muted-2); font-size: 13px; text-align: center; }
+      .channel-card {
+        background: linear-gradient(160deg, #1c0508 0%, var(--panel) 55%);
+        border-color: rgba(225,6,26,.35); display: flex; flex-direction: column;
+      }
+      .channel-card .handle {
+        direction: ltr; text-align: left; font-family: "Archivo", sans-serif;
+        font-weight: 900; font-size: clamp(24px, 4vw, 30px); letter-spacing: 0.01em; margin: 6px 0 2px;
+      }
+      .channel-card .plat { color: var(--muted); font-size: 14.5px; }
+      .channel-card p { color: var(--muted); font-size: 15px; margin: 14px 0 22px; }
+      .channel-card .btn { margin-top: auto; justify-content: center; }
+
+      /* ---------- textures ---------- */
+      .tex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: 18px; }
+      .tex-card {
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
+      }
+      .tex-card .thumb { display: block; background: var(--bg-2); }
+      .tex-card .thumb img {
+        width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+        transition: transform .25s ease;
+      }
+      .tex-card .thumb:hover img { transform: scale(1.04); }
+      .tex-info { padding: 15px 16px 16px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+      .tex-info h3 { margin: 0; font-size: 15.5px; font-weight: 800; line-height: 1.5; }
+      .tex-info .meta { direction: ltr; text-align: right; font-family: "Archivo", sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .04em; color: var(--muted-2); }
+      .btn-dl {
+        margin-top: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        background: var(--red); color: #fff; text-decoration: none; font-weight: 700; font-size: 14.5px;
+        padding: 10px 14px; border-radius: 9px; transition: background .15s;
+      }
+      .btn-dl:hover { background: #f2172a; }
+      .btn-dl svg { width: 16px; height: 16px; flex: none; }
+
+      [hidden] { display: none !important; }
+
+      /* ---------- textures CTA (home) ---------- */
+      .tex-cta {
+        margin-top: 74px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); padding: 26px 28px; text-decoration: none;
+        transition: border-color .15s;
+      }
+      .tex-cta:hover { border-color: rgba(225,6,26,.55); }
+      .tex-cta .kick {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.3em; color: var(--red); text-transform: uppercase; margin-bottom: 4px;
+      }
+      .tex-cta h2 { margin: 0; font-size: clamp(22px, 3.6vw, 28px); font-weight: 800; line-height: 1.3; }
+      .tex-cta p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+      .tex-cta-btn {
+        margin-inline-start: auto; display: inline-flex; align-items: center; gap: 9px;
+        background: var(--red); color: #fff; font-weight: 700; font-size: 15px;
+        padding: 12px 22px; border-radius: 10px; white-space: nowrap; transition: background .15s;
+      }
+      .tex-cta:hover .tex-cta-btn { background: #f2172a; }
+      .tex-cta-btn svg { width: 17px; height: 17px; flex: none; }
+
+      /* ---------- textures page ---------- */
+      .tex-page { padding-top: 40px; }
+      .page-head { margin-bottom: 30px; }
+      .back-link {
+        display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+        color: var(--muted); font-size: 14.5px; font-weight: 600;
+        border: 1px solid var(--line); border-radius: 9px; padding: 8px 15px;
+        background: var(--panel); transition: color .15s, border-color .15s;
+        margin-bottom: 26px;
+      }
+      .back-link:hover { color: var(--text); border-color: var(--muted-2); }
+      .back-link svg { width: 16px; height: 16px; flex: none; }
+      .page-head .kick {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.3em; color: var(--red); text-transform: uppercase; margin-bottom: 4px;
+      }
+      .page-head h1 { margin: 0; font-size: clamp(28px, 5vw, 38px); font-weight: 800; line-height: 1.25; }
+      .page-head p { margin: 8px 0 0; color: var(--muted); max-width: 560px; font-size: 15.5px; }
+      .back-row { margin-top: 28px; }
+      .back-row .back-link { margin-bottom: 0; }
+
+      /* ---------- footer ---------- */
+      footer {
+        margin-top: 84px; border-top: 1px solid var(--line-soft);
+        background: var(--bg-2); padding: 40px 0 34px;
+      }
+      .foot { display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; }
+      .foot .brand { font-size: 24px; }
+      .foot p { margin: 6px 0 0; color: var(--muted-2); font-size: 13.5px; max-width: 420px; }
+      .foot-links { margin-inline-start: auto; display: flex; flex-direction: column; gap: 8px; }
+      .foot-links a { color: var(--muted); text-decoration: none; font-size: 14.5px; }
+      .foot-links a:hover { color: var(--text); }
+      .foot .tagline-f {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 11.5px; font-weight: 700;
+        letter-spacing: 0.22em; color: var(--muted-2); text-transform: uppercase; margin-top: 4px;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <header class="topbar">
+      <div class="wrap topbar-in">
+        <a class="brand" href="#top" dir="ltr"><b>WR3D</b> <span>UNIVERSE</span></a>
+        <nav class="nav">
+          <a href="#results">نتایج شوها</a>
+          <a href="#next-event">رویداد بعدی</a>
+          <a href="#champions">قهرمانان</a>
+          <a href="#textures">دانلود تکسچر</a>
+          <a href="#about">درباره</a>
+        </nav>
+        <a class="btn-rubika" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" fill="currentColor" stroke="none"/></svg>
+          کانال روبیکا
+        </a>
+      </div>
+    </header>
+
+    <div class="hero" id="top">
+      <img class="bg" src="assets/hero-arena.webp" alt="" />
+      <div class="wrap hero-in">
+        <span class="hero-badge">WRESTLING EMPIRE BOOKING SHOWS</span>
+        <h1>WR3D <span class="u">Universe</span></h1>
+        <p class="tagline">The Best Wrestling Empire Booking Chanle on Rubika</p>
+        <p class="sub">دنیای بوکینگ کشتی‌کج با بازی Wrestling Empire؛ جایی که هر شو، هر مسابقه و هر کمربند، داستان خودش را دارد.</p>
+        <div class="hero-cta">
+          <a class="btn btn-red" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            تماشای شوها در روبیکا
+          </a>
+          <a class="btn btn-ghost" href="#results">نتایج سامراسلم</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker" id="tickerBar" aria-hidden="true">
+      <div class="ticker-track" id="tickerTrack">
+        <span>SummerSlam Night 2 <i>///</i> Randy Orton retained the Supertitle <i>///</i> Brock Lesnar still Undisputed Champion <i>///</i> NEW Universe Tag Team Champions: Strowman &amp; Rowan <i>///</i> Night 1 <i>///</i> Finn Bálor retained vs Cody Rhodes <i>///</i> CM Punk def. Gunther — Ambulance Match, Orton interfered <i>///</i> Drew McIntyre retained the IC Title <i>///</i></span>
+      </div>
+    </div>
+
+    <main class="wrap" id="view-home">
+
+      <!-- ======= RESULTS ======= -->
+      <section id="results">
+        <div class="sec-head reveal">
+          <div>
+            <div class="kick">Latest Event Results</div>
+            <h2>نتایج سامراسلم — دو شب</h2>
+          </div>
+          <p class="side">بزرگ‌ترین شو تابستان WR3D Universe در دو شب برگزار شد؛ سه کمربند در شب اول و سه کمربند در شب دوم روی خط بودند.</p>
+        </div>
+
+        <div class="nights">
+          <article class="night reveal">
+            <div class="night-head">
+              <span class="n">NIGHT 1</span>
+              <h3>شب اول</h3>
+              <span class="en-name">SummerSlam</span>
+            </div>
+
+            <div class="match">
+              <div class="vs"><span class="w">Oba Femi</span> <span class="def">DEF.</span> <span class="l">Solo Sikoa</span></div>
+              <div class="tags"><span class="tag">مسابقه تک‌نفره</span></div>
+              <figure class="spoiler-shot">
+                <a href="assets/spoiler-femi-sikoa.jpg" target="_blank" rel="noopener">
+                  <img src="assets/spoiler-femi-sikoa.jpg" alt="اوبا فمی ایستاده در رینگ سامراسلم بعد از پیروزی مقابل سولو سیکوا که روی زمین افتاده است" loading="lazy" />
+                </a>
+                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
+              </figure>
+            </div>
+
+            <div class="match">
+              <div class="vs"><span class="w">Drew McIntyre</span> <span class="def">DEF.</span> <span class="l">Adam Cole</span></div>
+              <div class="tags">
+                <span class="tag title">Intercontinental Championship</span>
+                <span class="tag">کمربند حفظ شد</span>
+              </div>
+              <figure class="spoiler-shot">
+                <a href="assets/spoiler-mcintyre-cole.jpg" target="_blank" rel="noopener">
+                  <img src="assets/spoiler-mcintyre-cole.jpg" alt="درو مک‌اینتایر با کمربند اینترکانتیننتال در رینگ سامراسلم، بعد از پیروزی مقابل آدام کول" loading="lazy" />
+                </a>
+                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
+              </figure>
+            </div>
+
+            <div class="match">
+              <div class="vs"><span class="w">CM Punk</span> <span class="def">DEF.</span> <span class="l">Gunther</span></div>
+              <div class="tags">
+                <span class="tag stip">Ambulance Match</span>
+                <span class="tag">با دخالت رندی اورتن</span>
+              </div>
+              <figure class="spoiler-shot">
+                <a href="assets/spoiler-punk-gunther.jpg" target="_blank" rel="noopener">
+                  <img src="assets/spoiler-punk-gunther.jpg" alt="سی‌ام پانک ایستاده در رینگ سامراسلم کنار گانتر که روی زمین افتاده است، بعد از پیروزی در مسابقه آمبولانس" loading="lazy" />
+                </a>
+                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
+              </figure>
+            </div>
+
+            <div class="match">
+              <div class="vs"><span class="w">Finn Bálor</span> <span class="def">DEF.</span> <span class="l">Cody Rhodes</span></div>
+              <div class="tags">
+                <span class="tag title">World Heavyweight Championship</span>
+                <span class="tag">مین‌ایونت شب اول</span>
+                <span class="tag">کمربند حفظ شد</span>
+              </div>
+              <figure class="spoiler-shot">
+                <a href="assets/spoiler-balor-rhodes.jpg" target="_blank" rel="noopener">
+                  <img src="assets/spoiler-balor-rhodes.jpg" alt="فین بالور با کمربند قهرمانی سنگین‌وزن جهان در رینگ سامراسلم، بعد از پیروزی مقابل کودی رودز" loading="lazy" />
+                </a>
+                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="night reveal">
+            <div class="night-head">
+              <span class="n">NIGHT 2</span>
+              <h3>شب دوم</h3>
+              <span class="en-name">SummerSlam</span>
+            </div>
+
+            <div class="match">
+              <div class="vs"><span class="w">Braun Strowman &amp; Erik Rowan</span> <span class="def">DEF.</span> <span class="l">Jacob Fatu &amp; Jimmy Uso</span></div>
+              <div class="tags">
+                <span class="tag title">Universe Tag Team Championship</span>
+                <span class="tag new">قهرمانان جدید</span>
+              </div>
+            </div>
+
+            <div class="match">
+              <div class="vs"><span class="w">Brock Lesnar</span> <span class="def">DEF.</span> <span class="l">Bron Breakker</span></div>
+              <div class="tags">
+                <span class="tag title">Undisputed Championship</span>
+                <span class="tag">کمربند حفظ شد</span>
+              </div>
+            </div>
+
+            <div class="match">
+              <div class="vs"><span class="w">Randy Orton</span> <span class="def">DEF.</span> <span class="l">“The Fiend” Bray Wyatt</span></div>
+              <div class="tags">
+                <span class="tag title">Supertitle</span>
+                <span class="tag stip">Falls Count Anywhere</span>
+                <span class="tag">مین‌ایونت شب دوم</span>
+                <span class="tag">کمربند حفظ شد</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="storyline reveal">
+          <div class="mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <div>
+            <h3>بعد از سامراسلم چه خبر است؟</h3>
+            <p>قراره جنگ برای الیمینیشن چمبر شروع بشه — منتظر راو و اسمکداون باشید.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= NEXT EVENT ======= -->
+      <section id="next-event">
+        <div class="next-event reveal">
+          <div class="kick">Next Event</div>
+          <h2 class="fa-title">رویداد بعدی</h2>
+          <div class="big">Elimination <span class="u">Chamber</span></div>
+          <p class="lead">نبردها و داستان‌های جدید بعد از سامراسلم به سمت یونیورس میان — چه کسی از قفس برنده بیرون میاد؟ <b>راو</b> و <b>اسمکداون</b> یونیورس رو به هیچ وجه از دست ندید!</p>
+
+          <ul class="stakes">
+            <li>
+              <div class="s-title">Supertitle</div>
+              <div class="s-holder">رندی اورتن</div>
+            </li>
+            <li>
+              <div class="s-title">Undisputed Championship</div>
+              <div class="s-holder">براک لزنر</div>
+            </li>
+            <li>
+              <div class="s-title">World Heavyweight Championship</div>
+              <div class="s-holder">فین بلر</div>
+            </li>
+            <li>
+              <div class="s-title">Intercontinental Championship</div>
+              <div class="s-holder">درو مک‌اینتایر</div>
+            </li>
+            <li>
+              <div class="s-title">Universe Tag Team Championship</div>
+              <div class="s-holder">بران استرومن و اریک روون</div>
+            </li>
+          </ul>
+
+          <div class="cta-row">
+            <a class="btn btn-red" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              دنبال کردن مسیر چمبر در روبیکا
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= CHAMPIONS ======= -->
+      <section id="champions">
+        <div class="sec-head reveal">
+          <div>
+            <div class="kick">Current Champions</div>
+            <h2>قهرمانان فعلی</h2>
+          </div>
+          <p class="side">کمربندهای WR3D Universe بعد از سامراسلم؛ فقط یک کمربند در این شو دست‌به‌دست شد.</p>
+        </div>
+
+        <div class="champs">
+          <article class="champ reveal">
+            <div class="belt" aria-hidden="true">
+              <svg viewBox="0 0 120 62" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M4 22h22M94 22h22M4 40h22M94 40h22" stroke-linecap="round"/>
+                <rect x="24" y="16" width="14" height="30" rx="4"/>
+                <rect x="82" y="16" width="14" height="30" rx="4"/>
+                <circle cx="60" cy="31" r="19"/>
+                <circle cx="60" cy="31" r="11.5" stroke-width="1.6"/>
+                <path d="M60 23.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div class="title-name">Supertitle</div>
+            <h3>Randy Orton</h3>
+            <div class="fa-name">رندی اورتن</div>
+            <div class="defense">آخرین دفاع: در برابر <b>“The Fiend” Bray Wyatt</b> — سامراسلم، شب دوم</div>
+          </article>
+
+          <article class="champ reveal">
+            <div class="belt" aria-hidden="true">
+              <svg viewBox="0 0 120 62" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M4 22h22M94 22h22M4 40h22M94 40h22" stroke-linecap="round"/>
+                <rect x="24" y="16" width="14" height="30" rx="4"/>
+                <rect x="82" y="16" width="14" height="30" rx="4"/>
+                <circle cx="60" cy="31" r="19"/>
+                <circle cx="60" cy="31" r="11.5" stroke-width="1.6"/>
+                <path d="M60 23.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div class="title-name">Undisputed Championship</div>
+            <h3>Brock Lesnar</h3>
+            <div class="fa-name">براک لزنر</div>
+            <div class="defense">آخرین دفاع: در برابر <b>Bron Breakker</b> — سامراسلم، شب دوم</div>
+          </article>
+
+          <article class="champ reveal">
+            <div class="belt" aria-hidden="true">
+              <svg viewBox="0 0 120 62" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M4 22h22M94 22h22M4 40h22M94 40h22" stroke-linecap="round"/>
+                <rect x="24" y="16" width="14" height="30" rx="4"/>
+                <rect x="82" y="16" width="14" height="30" rx="4"/>
+                <circle cx="60" cy="31" r="19"/>
+                <circle cx="60" cy="31" r="11.5" stroke-width="1.6"/>
+                <path d="M60 23.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div class="title-name">World Heavyweight Championship</div>
+            <h3>Finn Bálor</h3>
+            <div class="fa-name">فین بلر</div>
+            <div class="defense">آخرین دفاع: در برابر <b>Cody Rhodes</b> — سامراسلم، شب اول</div>
+          </article>
+
+          <article class="champ wide reveal">
+            <div class="belt" aria-hidden="true">
+              <svg viewBox="0 0 120 62" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M4 22h22M94 22h22M4 40h22M94 40h22" stroke-linecap="round"/>
+                <rect x="24" y="16" width="14" height="30" rx="4"/>
+                <rect x="82" y="16" width="14" height="30" rx="4"/>
+                <circle cx="60" cy="31" r="19"/>
+                <circle cx="60" cy="31" r="11.5" stroke-width="1.6"/>
+                <path d="M60 23.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div class="title-name">Intercontinental Championship</div>
+            <h3>Drew McIntyre</h3>
+            <div class="fa-name">درو مک‌اینتایر</div>
+            <div class="defense">آخرین دفاع: در برابر <b>Adam Cole</b> — سامراسلم، شب اول</div>
+          </article>
+
+          <article class="champ wide reveal">
+            <div class="belt" aria-hidden="true">
+              <svg viewBox="0 0 120 62" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M4 22h22M94 22h22M4 40h22M94 40h22" stroke-linecap="round"/>
+                <rect x="24" y="16" width="14" height="30" rx="4"/>
+                <rect x="82" y="16" width="14" height="30" rx="4"/>
+                <circle cx="60" cy="31" r="19"/>
+                <circle cx="60" cy="31" r="11.5" stroke-width="1.6"/>
+                <path d="M60 23.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div class="title-name">Universe Tag Team Championship</div>
+            <h3>Braun Strowman &amp; Erik Rowan</h3>
+            <div class="fa-name">بران استرومن و اریک روون</div>
+            <div class="defense">قهرمانان جدید: کمربند را از <b>Jacob Fatu &amp; Jimmy Uso</b> گرفتند — سامراسلم، شب دوم</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ======= TEXTURES CTA ======= -->
+      <a class="tex-cta reveal" href="#textures">
+        <div>
+          <div class="kick">Texture Downloads</div>
+          <h2>دانلود تکسچر</h2>
+          <p>هر پنج تکسچر دیمن فین بالور برای Wrestling Empire، با کیفیت اصلی در صفحه‌ی دانلود تکسچر.</p>
+        </div>
+        <span class="tex-cta-btn">
+          مشاهده و دانلود
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        </span>
+      </a>
+
+      <!-- ======= ABOUT / CHANNEL ======= -->
+      <section id="about">
+        <div class="sec-head reveal">
+          <div>
+            <div class="kick">About The Universe</div>
+            <h2>درباره WR3D Universe</h2>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card reveal">
+            <h3>اینجا چه خبر است؟</h3>
+            <p><b>WR3D Universe</b> یک دنیای بوکینگ کشتی‌کج است که با بازی <b>Wrestling Empire</b> ساخته و اجرا می‌شود؛ شوها با سبک و سلیقه اختصاصی بوک می‌شوند — از کارت مسابقه و فیودها تا سرنوشت تک‌تک کمربندها.</p>
+            <p>سامراسلم دوشبه تازه‌ترین رویداد بزرگ این دنیا بود: هفت مسابقه، شش مسابقه کمربندی و فقط یک تغییر قهرمان. حالا نوبت فصل تازه Raw و فیودهای جدید است.</p>
+            <div class="facts">
+              <div class="fact"><div class="v">2</div><div class="k">شب سامراسلم</div></div>
+              <div class="fact"><div class="v">7</div><div class="k">مسابقه</div></div>
+              <div class="fact"><div class="v">5</div><div class="k">کمربند فعال</div></div>
+            </div>
+          </div>
+
+          <div class="channel-card reveal">
+            <div class="plat">کانال رسمی در روبیکا</div>
+            <div class="handle">@wr3duniverse</div>
+            <p>همه شوها، نتایج و پوسترهای WR3D Universe اول در کانال روبیکا منتشر می‌شود. عضو شو تا هیچ شویی را از دست ندهی.</p>
+            <a class="btn btn-red" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              عضویت در کانال روبیکا
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======= TEXTURES PAGE (separate view, opened via #textures) ======= -->
+    <main class="wrap" id="view-textures" hidden>
+      <section class="tex-page" id="texturesPage">
+        <div class="page-head">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگشت به صفحه اصلی
+          </a>
+          <div class="kick">Texture Downloads</div>
+          <h1>دانلود تکسچر</h1>
+          <p>تکسچرهای دیمن فین بالور برای Wrestling Empire — هر تکسچر با کیفیت اصلی اینجاست؛ روی دکمه دانلود بزن و فایل رو بگیر.</p>
+        </div>
+
+        <div class="tex-grid">
+          <article class="tex-card reveal">
+            <a class="thumb" href="assets/demon-balor-texture-1.jpg" target="_blank" rel="noopener">
+              <img src="assets/demon-balor-texture-1.jpg" alt="تکسچر ۱ دیمن فین بالور" loading="lazy" />
+            </a>
+            <div class="tex-info">
+              <h3>تکسچر ۱ — دیمن فین بالور</h3>
+              <div class="meta">JPG · 682×1365 · 74 KB</div>
+              <a class="btn-dl" href="assets/demon-balor-texture-1.jpg" download="demon-balor-texture-1.jpg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 21h16"/></svg>
+                دانلود تکسچر
+              </a>
+            </div>
+          </article>
+
+          <article class="tex-card reveal">
+            <a class="thumb" href="assets/demon-balor-texture-2.jpg" target="_blank" rel="noopener">
+              <img src="assets/demon-balor-texture-2.jpg" alt="تکسچر ۲ دیمن فین بالور" loading="lazy" />
+            </a>
+            <div class="tex-info">
+              <h3>تکسچر ۲ — دیمن فین بالور</h3>
+              <div class="meta">JPG · 682×1365 · 78 KB</div>
+              <a class="btn-dl" href="assets/demon-balor-texture-2.jpg" download="demon-balor-texture-2.jpg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 21h16"/></svg>
+                دانلود تکسچر
+              </a>
+            </div>
+          </article>
+
+          <article class="tex-card reveal">
+            <a class="thumb" href="assets/demon-balor-texture-3.jpg" target="_blank" rel="noopener">
+              <img src="assets/demon-balor-texture-3.jpg" alt="تکسچر ۳ دیمن فین بالور" loading="lazy" />
+            </a>
+            <div class="tex-info">
+              <h3>تکسچر ۳ — دیمن فین بالور</h3>
+              <div class="meta">JPG · 2048×2048 · 167 KB</div>
+              <a class="btn-dl" href="assets/demon-balor-texture-3.jpg" download="demon-balor-texture-3.jpg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 21h16"/></svg>
+                دانلود تکسچر
+              </a>
+            </div>
+          </article>
+
+          <article class="tex-card reveal">
+            <a class="thumb" href="assets/demon-balor-texture-4.jpg" target="_blank" rel="noopener">
+              <img src="assets/demon-balor-texture-4.jpg" alt="تکسچر ۴ دیمن فین بالور" loading="lazy" />
+            </a>
+            <div class="tex-info">
+              <h3>تکسچر ۴ — دیمن فین بالور</h3>
+              <div class="meta">JPG · 1441×720 · 134 KB</div>
+              <a class="btn-dl" href="assets/demon-balor-texture-4.jpg" download="demon-balor-texture-4.jpg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 21h16"/></svg>
+                دانلود تکسچر
+              </a>
+            </div>
+          </article>
+
+          <article class="tex-card reveal">
+            <a class="thumb" href="assets/demon-balor-texture-5.jpg" target="_blank" rel="noopener">
+              <img src="assets/demon-balor-texture-5.jpg" alt="تکسچر ۵ دیمن فین بالور" loading="lazy" />
+            </a>
+            <div class="tex-info">
+              <h3>تکسچر ۵ — دیمن فین بالور</h3>
+              <div class="meta">JPG · 2048×2048 · 256 KB</div>
+              <a class="btn-dl" href="assets/demon-balor-texture-5.jpg" download="demon-balor-texture-5.jpg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 21h16"/></svg>
+                دانلود تکسچر
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="back-row">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگشت به صفحه اصلی
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap foot">
+        <div>
+          <a class="brand" href="#top" dir="ltr"><b>WR3D</b> <span>UNIVERSE</span></a>
+          <div class="tagline-f">The Best Wrestling Empire Booking Chanle on Rubika</div>
+          <p>شوهای بوکینگ Wrestling Empire — نتایج و قهرمانان، همه در یک جا.</p>
+        </div>
+        <nav class="foot-links">
+          <a href="#results">نتایج سامراسلم</a>
+          <a href="#next-event">رویداد بعدی — الیمینیشن چمبر</a>
+          <a href="#champions">قهرمانان فعلی</a>
+          <a href="#textures">دانلود تکسچر</a>
+          <a href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">کانال روبیکا — @wr3duniverse</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      // Duplicate ticker content once so the marquee loops seamlessly.
+      (function () {
+        var track = document.getElementById('tickerTrack');
+        if (track) track.innerHTML += track.innerHTML;
+      })();
+
+      // Two views in one page: home, and the textures page opened via #textures.
+      (function () {
+        var home = document.getElementById('view-home');
+        var tex = document.getElementById('view-textures');
+        var hero = document.getElementById('top');
+        var ticker = document.getElementById('tickerBar');
+        if (!home || !tex) return;
+        function route() {
+          if (location.hash === '#textures') {
+            home.hidden = true;
+            tex.hidden = false;
+            if (hero) hero.hidden = true;
+            if (ticker) ticker.hidden = true;
+            document.title = 'دانلود تکسچر — WR3D Universe';
+            window.scrollTo(0, 0);
+          } else {
+            tex.hidden = true;
+            home.hidden = false;
+            if (hero) hero.hidden = false;
+            if (ticker) ticker.hidden = false;
+            document.title = 'WR3D Universe';
+            var id = location.hash.replace('#', '');
+            if (id && id !== 'top') {
+              var el = document.getElementById(id);
+              if (el) el.scrollIntoView();
+            } else {
+              window.scrollTo(0, 0);
+            }
+          }
+        }
+        window.addEventListener('hashchange', route);
+        route();
+      })();
+
+    </script>
+  </body>
+</html>
