@@ -1092,6 +1092,20 @@
         var preview = 0;
         var selected = myVote; // pending pick — only recorded when ثبت نمره is pressed
         var busy = false;
+        // Fetch with an 8s timeout so a slow counter service can never
+        // leave the button stuck on «در حال ثبت…».
+        function fetchTimeout(url, ms) {
+          if (!window.AbortController) return fetch(url);
+          var ctrl = new AbortController();
+          var timer = setTimeout(function () { ctrl.abort(); }, ms);
+          return fetch(url, { signal: ctrl.signal }).then(function (r) {
+            clearTimeout(timer);
+            return r;
+          }, function (e) {
+            clearTimeout(timer);
+            throw e;
+          });
+        }
 
         function paintInput() {
           var lit = preview || selected;
@@ -1158,7 +1172,7 @@
             if (!selected || myVote || busy) return;
             busy = true;
             updateSubmit();
-            fetch(API + '/hit/' + NS + '/' + keys[selected - 1])
+            fetchTimeout(API + '/hit/' + NS + '/' + keys[selected - 1], 8000)
               .then(function (r) { return r.json(); })
               .then(function (d) {
                 if (d && typeof d.value === 'number') counts[selected - 1] = d.value;
@@ -1183,7 +1197,7 @@
         render();
         // Load the shared totals for all visitors.
         Promise.all(keys.map(function (k) {
-          return fetch(API + '/get/' + NS + '/' + k)
+          return fetchTimeout(API + '/get/' + NS + '/' + k, 8000)
             .then(function (r) { return r.ok ? r.json() : null; })
             .catch(function () { return null; });
         })).then(function (res) {
