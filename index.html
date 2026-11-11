@@ -1092,6 +1092,8 @@
         var preview = 0;
         var selected = myVote; // pending pick — only recorded when ثبت نمره is pressed
         var busy = false;
+        var loaded = false;    // shared totals have arrived from the server
+        var loadFailed = false; // server could not be reached after retries
         // Fetch with an 8s timeout so a slow counter service can never
         // leave the button stuck on «در حال ثبت…».
         function fetchTimeout(url, ms) {
@@ -1134,7 +1136,9 @@
           avgFg.style.width = (avg / 5 * 100) + '%';
           avgNote.innerHTML = total
             ? 'میانگین نمره از مجموع <b>' + fa(total) + '</b> نمره ثبت‌شده'
-            : 'هنوز نمره‌ای ثبت نشده — اولین نفر باش!';
+            : (loadFailed
+              ? 'نمره‌ها فعلاً از سرور شمارش بارگذاری نشد — صفحه را تازه کن.'
+              : (loaded ? 'هنوز نمره‌ای ثبت نشده — اولین نفر باش!' : 'در حال بارگذاری نمره‌ها…'));
           dist.innerHTML = '';
           for (var s = 5; s >= 1; s--) {
             var c = counts[s - 1];
@@ -1176,6 +1180,7 @@
               .then(function (r) { return r.json(); })
               .then(function (d) {
                 if (d && typeof d.value === 'number') counts[selected - 1] = d.value;
+                loaded = true;
                 myVote = selected;
                 try { localStorage.setItem(VOTE_KEY, String(myVote)); } catch (e) {}
                 busy = false;
@@ -1195,17 +1200,38 @@
           msg.innerHTML = 'تو قبلاً به سامراسلم <b>' + starNames[myVote] + ' ستاره</b> داده‌ای و نمره‌ات در شمارش مشترک ثبت شده است.';
         }
         render();
-        // Load the shared totals for all visitors.
-        Promise.all(keys.map(function (k) {
-          return fetchTimeout(API + '/get/' + NS + '/' + k, 8000)
-            .then(function (r) { return r.ok ? r.json() : null; })
-            .catch(function () { return null; });
-        })).then(function (res) {
-          res.forEach(function (d, i) {
-            if (d && typeof d.value === 'number') counts[i] = d.value;
+        // Load the shared totals for all visitors, retrying the counters
+        // that fail (the counter service is sometimes slow) — until they
+        // arrive, the average note shows a loading message instead of
+        // wrongly claiming that no votes exist.
+        var gotFlags = [false, false, false, false, false];
+        function loadCounts(round) {
+          var jobs = keys.map(function (k, i) {
+            if (gotFlags[i]) return Promise.resolve(null);
+            return fetchTimeout(API + '/get/' + NS + '/' + k, 10000)
+              .then(function (r) { return r.ok ? r.json() : null; })
+              .catch(function () { return null; });
           });
-          render();
-        });
+          Promise.all(jobs).then(function (res) {
+            res.forEach(function (d, i) {
+              if (d && typeof d.value === 'number') {
+                counts[i] = d.value;
+                gotFlags[i] = true;
+              }
+            });
+            if (gotFlags.every(function (g) { return g; })) {
+              loaded = true;
+              render();
+            } else if (round < 4) {
+              render();
+              setTimeout(function () { loadCounts(round + 1); }, 3500);
+            } else {
+              loadFailed = true;
+              render();
+            }
+          });
+        }
+        loadCounts(1);
       })();
 
     </script>
