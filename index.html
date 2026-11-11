@@ -234,6 +234,80 @@
       .storyline h3 { margin: 0 0 4px; font-size: 17.5px; font-weight: 800; }
       .storyline p { margin: 0; color: var(--muted); font-size: 15px; }
 
+      /* ---------- rate the event ---------- */
+      .rate-card {
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); padding: 28px;
+        display: grid; grid-template-columns: 1.15fr 1fr; gap: 30px 44px;
+      }
+      @media (max-width: 860px) { .rate-card { grid-template-columns: 1fr; } }
+      .rate-avg { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+      .rate-avg-num {
+        direction: ltr; font-family: "Oswald", sans-serif; font-weight: 700;
+        font-size: 64px; line-height: 1; color: #fff;
+      }
+      .rate-avg-num small { font-size: 20px; color: var(--muted-2); font-weight: 600; }
+      .avg-stars { position: relative; width: max-content; }
+      .avg-row { display: flex; gap: 3px; }
+      .avg-row svg { width: 27px; height: 27px; flex: none; }
+      .avg-row-bg svg { fill: #33333b; }
+      .avg-row-fg {
+        position: absolute; top: 0; left: 0; overflow: hidden; width: 0;
+      }
+      .avg-row-fg svg { fill: var(--gold); }
+      .rate-avg-note { color: var(--muted); font-size: 14.5px; margin-top: 6px; }
+      .rate-avg-note b { color: var(--text); }
+      .rate-vote { margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--line); }
+      .rate-vote-title { font-weight: 800; font-size: 16.5px; margin-bottom: 10px; }
+      .stars-input { display: inline-flex; gap: 4px; }
+      .star-btn {
+        appearance: none; background: none; border: 0; padding: 4px; cursor: pointer;
+        color: #3d3d46; line-height: 0; border-radius: 8px;
+        transition: transform .12s, color .12s;
+      }
+      .star-btn svg { width: 40px; height: 40px; fill: currentColor; display: block; }
+      .star-btn:hover { transform: scale(1.12); }
+      .star-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+      .star-btn.on { color: var(--gold); }
+      .star-btn.mine { color: var(--gold); box-shadow: inset 0 0 0 2px rgba(212,160,23,.55); }
+      .rate-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+      .btn-submit {
+        appearance: none; cursor: pointer;
+        font-family: inherit; font-weight: 700; font-size: 15.5px;
+        background: var(--red); color: #fff; padding: 12px 32px; border-radius: 10px;
+        border: 1px solid transparent;
+        box-shadow: 0 8px 24px rgba(225,6,26,.3);
+        transition: background .15s, transform .15s, box-shadow .15s;
+      }
+      .btn-submit:hover:not(:disabled) { background: #f2172a; }
+      .btn-submit:active:not(:disabled) { transform: scale(.98); }
+      .btn-submit:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+      .btn-submit:disabled {
+        background: var(--panel-2); color: var(--muted-2); cursor: not-allowed;
+        box-shadow: none; border-color: var(--line);
+      }
+      .rate-msg { margin-top: 10px; min-height: 26px; color: var(--muted); font-size: 14.5px; }
+      .rate-msg b { color: #8be89b; font-weight: 700; }
+      .rate-dist { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+      .dist-row { display: flex; align-items: center; gap: 12px; }
+      .dist-label { flex: none; width: 64px; font-size: 13.5px; font-weight: 700; color: var(--muted); }
+      .dist-track {
+        flex: 1; height: 9px; border-radius: 999px; background: var(--bg-2);
+        border: 1px solid var(--line-soft); overflow: hidden;
+      }
+      .dist-fill {
+        display: block; height: 100%; width: 0; border-radius: 999px;
+        background: linear-gradient(90deg, #a97e10, var(--gold));
+        transition: width .45s ease;
+      }
+      .dist-count {
+        flex: none; width: 44px; text-align: left;
+        font-family: "Archivo", "Vazirmatn", sans-serif; font-size: 13.5px; font-weight: 700; color: var(--muted);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dist-fill, .star-btn { transition: none; }
+      }
+
       /* ---------- next event ---------- */
       .next-event {
         position: relative; overflow: hidden;
@@ -425,6 +499,7 @@
         <a class="brand" href="#top" dir="ltr"><b>WR3D</b> <span>UNIVERSE</span></a>
         <nav class="nav">
           <a href="#results">نتایج شوها</a>
+          <a href="#rate">نمره به رویداد</a>
           <a href="#next-event">رویداد بعدی</a>
           <a href="#champions">قهرمانان</a>
           <a href="#textures">دانلود تکسچر</a>
@@ -590,6 +665,61 @@
             <h3>بعد از سامراسلم چه خبر است؟</h3>
             <p>قراره جنگ برای الیمینیشن چمبر شروع بشه — منتظر راو و اسمکداون باشید.</p>
           </div>
+        </div>
+      </section>
+
+      <!-- ======= RATE THE EVENT ======= -->
+      <section id="rate">
+        <div class="sec-head reveal">
+          <div>
+            <div class="kick">Rate The Event</div>
+            <h2>به سامراسلم نمره بده</h2>
+          </div>
+          <p class="side">سامراسلم دوشبه چطور بود؟ از یک تا پنج ستاره انتخاب کن و با دکمه «ثبت نمره» رأیت را نهایی کن — میانگین و تعداد نمره‌ها همین‌جا نمایش داده می‌شود.</p>
+        </div>
+
+        <div class="rate-card reveal">
+          <div>
+            <div class="rate-avg">
+              <div class="rate-avg-num"><span id="rateAvgNum">—</span><small> / ۵</small></div>
+              <div>
+                <div class="avg-stars" dir="ltr" aria-hidden="true">
+                  <div class="avg-row avg-row-bg">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  </div>
+                  <div class="avg-row avg-row-fg" id="avgStarsFg">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  </div>
+                </div>
+                <div class="rate-avg-note" id="rateAvgNote">هنوز نمره‌ای ثبت نشده — اولین نفر باش!</div>
+              </div>
+            </div>
+
+            <div class="rate-vote">
+              <div class="rate-vote-title">نمره تو به سامراسلم:</div>
+              <div class="stars-input" id="starsInput" dir="ltr" role="radiogroup" aria-label="نمره از یک تا پنج ستاره">
+                <button type="button" class="star-btn" data-value="1" role="radio" aria-checked="false" aria-label="یک ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
+                <button type="button" class="star-btn" data-value="2" role="radio" aria-checked="false" aria-label="دو ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
+                <button type="button" class="star-btn" data-value="3" role="radio" aria-checked="false" aria-label="سه ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
+                <button type="button" class="star-btn" data-value="4" role="radio" aria-checked="false" aria-label="چهار ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
+                <button type="button" class="star-btn" data-value="5" role="radio" aria-checked="false" aria-label="پنج ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
+              </div>
+              <div class="rate-actions">
+                <button type="button" class="btn-submit" id="rateSubmit" disabled>ثبت نمره</button>
+              </div>
+              <div class="rate-msg" id="rateMsg" aria-live="polite">اول ستاره‌ها را انتخاب کن، بعد دکمه «ثبت نمره» را بزن تا رأیت ثبت شود.</div>
+            </div>
+          </div>
+
+          <div class="rate-dist" id="rateDist" aria-label="توزیع نمره‌های ثبت‌شده"></div>
         </div>
       </section>
 
@@ -881,6 +1011,7 @@
         </div>
         <nav class="foot-links">
           <a href="#results">نتایج سامراسلم</a>
+          <a href="#rate">نمره به سامراسلم</a>
           <a href="#next-event">رویداد بعدی — الیمینیشن چمبر</a>
           <a href="#champions">قهرمانان فعلی</a>
           <a href="#textures">دانلود تکسچر</a>
@@ -928,6 +1059,139 @@
         }
         window.addEventListener('hashchange', route);
         route();
+      })();
+
+      // Star rating for SummerSlam (shared counters): the visitor picks a
+      // star, then confirms with the ثبت نمره button. Confirmed votes are
+      // counted on a shared counter service (Abacus), so every visitor sees
+      // the same totals and average. One confirmed vote per device keeps
+      // the shared totals accurate.
+      (function () {
+        var input = document.getElementById('starsInput');
+        if (!input) return;
+        var btns = Array.prototype.slice.call(input.querySelectorAll('.star-btn'));
+        var avgNum = document.getElementById('rateAvgNum');
+        var avgFg = document.getElementById('avgStarsFg');
+        var avgNote = document.getElementById('rateAvgNote');
+        var msg = document.getElementById('rateMsg');
+        var submitBtn = document.getElementById('rateSubmit');
+        var dist = document.getElementById('rateDist');
+        var API = 'https://abacus.jasoncameron.dev';
+        var NS = 'hoseinstyles-boop.github.io';
+        var keys = ['summerslam-stars-1', 'summerslam-stars-2', 'summerslam-stars-3', 'summerslam-stars-4', 'summerslam-stars-5'];
+        var VOTE_KEY = 'wr3d-summerslam-my-vote';
+        var counts = [0, 0, 0, 0, 0];
+        var myVote = 0;
+        try {
+          myVote = parseInt(localStorage.getItem(VOTE_KEY) || '0', 10) || 0;
+          if (myVote < 0 || myVote > 5) myVote = 0;
+        } catch (e) { /* storage unavailable */ }
+        function fa(n) { return Number(n).toLocaleString('fa-IR'); }
+        function faAvg(x) { return x.toLocaleString('fa-IR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }); }
+        var starNames = ['', 'یک', 'دو', 'سه', 'چهار', 'پنج'];
+        var preview = 0;
+        var selected = myVote; // pending pick — only recorded when ثبت نمره is pressed
+        var busy = false;
+
+        function paintInput() {
+          var lit = preview || selected;
+          btns.forEach(function (b) {
+            var v = parseInt(b.getAttribute('data-value'), 10);
+            b.classList.toggle('on', v <= lit);
+            b.classList.toggle('mine', v === selected);
+            b.setAttribute('aria-checked', v === selected ? 'true' : 'false');
+          });
+        }
+        function updateSubmit() {
+          if (!submitBtn) return;
+          if (myVote) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'نمره‌ات ثبت شده';
+            return;
+          }
+          submitBtn.disabled = !(selected > 0) || busy;
+          submitBtn.textContent = busy ? 'در حال ثبت…' : 'ثبت نمره';
+        }
+        function render() {
+          var total = counts.reduce(function (a, b) { return a + b; }, 0);
+          var sum = counts.reduce(function (a, c, i) { return a + c * (i + 1); }, 0);
+          var avg = total ? sum / total : 0;
+          avgNum.textContent = total ? faAvg(avg) : '—';
+          avgFg.style.width = (avg / 5 * 100) + '%';
+          avgNote.innerHTML = total
+            ? 'میانگین نمره از مجموع <b>' + fa(total) + '</b> نمره ثبت‌شده'
+            : 'هنوز نمره‌ای ثبت نشده — اولین نفر باش!';
+          dist.innerHTML = '';
+          for (var s = 5; s >= 1; s--) {
+            var c = counts[s - 1];
+            var pct = total ? Math.round(c / total * 100) : 0;
+            var row = document.createElement('div');
+            row.className = 'dist-row';
+            row.innerHTML =
+              '<span class="dist-label">' + fa(s) + ' ستاره</span>' +
+              '<span class="dist-track"><span class="dist-fill" style="width:' + pct + '%"></span></span>' +
+              '<span class="dist-count">' + fa(c) + '</span>';
+            dist.appendChild(row);
+          }
+          paintInput();
+          updateSubmit();
+        }
+        btns.forEach(function (b) {
+          var v = parseInt(b.getAttribute('data-value'), 10);
+          b.addEventListener('click', function () {
+            // Picking a star only stages the vote — nothing is recorded
+            // until the visitor presses the ثبت نمره button.
+            selected = v;
+            paintInput();
+            updateSubmit();
+            if (myVote) {
+              msg.innerHTML = 'نمره‌ات قبلاً ثبت شده و در شمارش مشترک همه بازدیدکننده‌ها حساب شده است.';
+            } else {
+              msg.innerHTML = 'نمره <b>' + starNames[v] + ' ستاره</b> انتخاب شد — برای ثبت نهایی، دکمه «ثبت نمره» را بزن.';
+            }
+          });
+          b.addEventListener('pointerenter', function () { preview = v; paintInput(); });
+          b.addEventListener('focus', function () { preview = v; paintInput(); });
+        });
+        if (submitBtn) {
+          submitBtn.addEventListener('click', function () {
+            if (!selected || myVote || busy) return;
+            busy = true;
+            updateSubmit();
+            fetch(API + '/hit/' + NS + '/' + keys[selected - 1])
+              .then(function (r) { return r.json(); })
+              .then(function (d) {
+                if (d && typeof d.value === 'number') counts[selected - 1] = d.value;
+                myVote = selected;
+                try { localStorage.setItem(VOTE_KEY, String(myVote)); } catch (e) {}
+                busy = false;
+                render();
+                msg.innerHTML = '<b>نمره‌ات ثبت شد!</b> تو به سامراسلم ' + starNames[myVote] + ' ستاره دادی و نمره‌ات در شمارش همه بازدیدکننده‌ها حساب شد.';
+              })
+              .catch(function () {
+                busy = false;
+                updateSubmit();
+                msg.innerHTML = 'ارتباط با سرور شمارش برقرار نشد — یک بار دیگر دکمه ثبت را بزن.';
+              });
+          });
+        }
+        input.addEventListener('pointerleave', function () { preview = 0; paintInput(); });
+        input.addEventListener('focusout', function () { preview = 0; paintInput(); });
+        if (myVote) {
+          msg.innerHTML = 'تو قبلاً به سامراسلم <b>' + starNames[myVote] + ' ستاره</b> داده‌ای و نمره‌ات در شمارش مشترک ثبت شده است.';
+        }
+        render();
+        // Load the shared totals for all visitors.
+        Promise.all(keys.map(function (k) {
+          return fetch(API + '/get/' + NS + '/' + k)
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .catch(function () { return null; });
+        })).then(function (res) {
+          res.forEach(function (d, i) {
+            if (d && typeof d.value === 'number') counts[i] = d.value;
+          });
+          render();
+        });
       })();
 
     </script>
