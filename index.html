@@ -187,6 +187,36 @@
       }
       .news-card p { margin: 0; color: var(--text); font-size: 15.5px; line-height: 1.9; }
 
+      /* ---------- countdown ---------- */
+      .countdown {
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-top: 3px solid var(--red);
+        border-radius: var(--radius); padding: 30px 28px 28px; text-align: center;
+      }
+      .countdown .kick {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.3em; color: var(--red); text-transform: uppercase; margin-bottom: 4px;
+      }
+      .countdown .cd-title { margin: 0; font-size: clamp(24px, 4.2vw, 32px); font-weight: 800; line-height: 1.3; }
+      .countdown .cd-date { margin: 6px 0 0; color: var(--muted); font-size: 15.5px; font-weight: 700; }
+      .cd-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+        max-width: 560px; margin: 26px auto 0;
+      }
+      .cd-unit {
+        background: var(--bg-2); border: 1px solid var(--line);
+        border-radius: 12px; padding: 16px 6px 12px;
+      }
+      .cd-num {
+        display: block; direction: ltr;
+        font-family: "Oswald", "Vazirmatn", sans-serif; font-weight: 700;
+        font-size: clamp(30px, 6vw, 44px); line-height: 1.1; color: #fff;
+        font-variant-numeric: tabular-nums;
+      }
+      .cd-label { display: block; color: var(--muted); font-size: 13.5px; font-weight: 700; margin-top: 4px; }
+      .cd-done { margin-top: 26px; font-size: clamp(20px, 4vw, 26px); font-weight: 800; color: #ff9aa4; line-height: 1.5; }
+      @media (max-width: 480px) { .cd-grid { gap: 8px; } }
+
       /* ---------- results ---------- */
       .nights { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
       @media (max-width: 860px) { .nights { grid-template-columns: 1fr; } }
@@ -571,6 +601,22 @@
             <div class="news-date">۳۰ آبان ۱۴۰۵</div>
             <p>وقفه ای که در سامراسلم افتاده با مسابقه فیند و رندی جبران میشه چون یکی از شاهکار ترین مسابقه های یونیورس خواهد بود. اخبار جدید بزودی..</p>
           </article>
+        </div>
+      </section>
+
+      <!-- ======= COUNTDOWN: FIEND VS ORTON ======= -->
+      <section id="fiend-orton">
+        <div class="countdown reveal">
+          <div class="kick">Countdown</div>
+          <h2 class="cd-title">مسابقه فیند و رندی اورتن</h2>
+          <p class="cd-date">۵ آذر ۱۴۰۵</p>
+          <div class="cd-grid" id="cdGrid">
+            <div class="cd-unit"><span class="cd-num" id="cdDays">—</span><span class="cd-label">روز</span></div>
+            <div class="cd-unit"><span class="cd-num" id="cdHours">—</span><span class="cd-label">ساعت</span></div>
+            <div class="cd-unit"><span class="cd-num" id="cdMinutes">—</span><span class="cd-label">دقیقه</span></div>
+            <div class="cd-unit"><span class="cd-num" id="cdSeconds">—</span><span class="cd-label">ثانیه</span></div>
+          </div>
+          <div class="cd-done" id="cdDone" hidden>مسابقه در فیند و رندی اورتن شروع شد</div>
         </div>
       </section>
 
@@ -1269,6 +1315,48 @@
           });
         }
         loadCounts(1);
+      })();
+
+      // Countdown to the Fiend vs Randy Orton match: ۵ آذر ۱۴۰۵, 00:00
+      // Tehran time (26 Nov 2026 00:00 Asia/Tehran = 25 Nov 2026 20:30 UTC).
+      // Ticks every second with Persian digits; when it reaches zero the
+      // grid is replaced by the "match started" message.
+      (function () {
+        var grid = document.getElementById('cdGrid');
+        if (!grid) return;
+        var done = document.getElementById('cdDone');
+        var daysEl = document.getElementById('cdDays');
+        var hoursEl = document.getElementById('cdHours');
+        var minutesEl = document.getElementById('cdMinutes');
+        var secondsEl = document.getElementById('cdSeconds');
+        var TARGET = Date.UTC(2026, 10, 25, 20, 30, 0);
+        var FA_DIGITS = '۰۱۲۳۴۵۶۷۸۹';
+        function faNum(n, pad) {
+          var s = String(n);
+          if (pad) { while (s.length < 2) s = '0' + s; }
+          return s.replace(/[0-9]/g, function (d) { return FA_DIGITS[d]; });
+        }
+        var timer = null;
+        function tick() {
+          var diff = TARGET - Date.now();
+          if (diff <= 0) {
+            grid.hidden = true;
+            if (done) done.hidden = false;
+            if (timer) clearInterval(timer);
+            return;
+          }
+          var totalSec = Math.floor(diff / 1000);
+          var days = Math.floor(totalSec / 86400);
+          var hours = Math.floor((totalSec % 86400) / 3600);
+          var minutes = Math.floor((totalSec % 3600) / 60);
+          var seconds = totalSec % 60;
+          daysEl.textContent = faNum(days, false);
+          hoursEl.textContent = faNum(hours, true);
+          minutesEl.textContent = faNum(minutes, true);
+          secondsEl.textContent = faNum(seconds, true);
+        }
+        tick();
+        timer = setInterval(tick, 1000);
       })();
 
     </script>
