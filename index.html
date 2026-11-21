@@ -173,6 +173,20 @@
       .sec-head p { margin: 0; color: var(--muted); max-width: 520px; font-size: 15.5px; }
       .sec-head .side { margin-inline-start: auto; }
 
+      /* ---------- news ---------- */
+      .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      @media (max-width: 860px) { .news-grid { grid-template-columns: 1fr; } }
+      .news-card {
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); padding: 20px 22px;
+      }
+      .news-date {
+        display: inline-block; font-size: 12.5px; font-weight: 700;
+        color: #ff9aa4; border: 1px solid rgba(225,6,26,.45); background: var(--red-soft);
+        border-radius: 999px; padding: 2.5px 11px; margin-bottom: 10px;
+      }
+      .news-card p { margin: 0; color: var(--text); font-size: 15.5px; line-height: 1.9; }
+
       /* ---------- results ---------- */
       .nights { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
       @media (max-width: 860px) { .nights { grid-template-columns: 1fr; } }
@@ -498,6 +512,7 @@
       <div class="wrap topbar-in">
         <a class="brand" href="#top" dir="ltr"><b>WR3D</b> <span>UNIVERSE</span></a>
         <nav class="nav">
+          <a href="#news">اخبار</a>
           <a href="#results">نتایج شوها</a>
           <a href="#rate">نمره به رویداد</a>
           <a href="#next-event">رویداد بعدی</a>
@@ -536,6 +551,28 @@
     </div>
 
     <main class="wrap" id="view-home">
+
+      <!-- ======= NEWS ======= -->
+      <section id="news">
+        <div class="sec-head">
+          <div>
+            <div class="kick">Universe News</div>
+            <h2>اخبار یونیورس</h2>
+          </div>
+        </div>
+
+        <div class="news-grid">
+          <article class="news-card">
+            <div class="news-date">۳۰ آبان ۱۴۰۵</div>
+            <p>مسابقات راهیابی به المینیشن چمبر در اولین راو و اسمکداون بعد از سامراسلم شروع میشن.</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-date">۳۰ آبان ۱۴۰۵</div>
+            <p>وقفه ای که در سامراسلم افتاده با مسابقه فیند و رندی جبران میشه چون یکی از شاهکار ترین مسابقه های یونیورس خواهد بود. اخبار جدید بزودی..</p>
+          </article>
+        </div>
+      </section>
 
       <!-- ======= RESULTS ======= -->
       <section id="results">
