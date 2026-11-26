@@ -138,6 +138,12 @@
       .btn-red:hover { background: #f2172a; }
       .btn-ghost { background: rgba(10,10,12,.55); color: #fff; border: 1px solid rgba(255,255,255,.35); }
       .btn-ghost:hover { border-color: #fff; }
+      .btn-gold {
+        background: var(--gold); color: #141005;
+        box-shadow: 0 10px 30px rgba(212,160,23,.4);
+        border: 1px solid #f0c94a;
+      }
+      .btn-gold:hover { background: #eab616; }
       .btn svg { width: 17px; height: 17px; }
 
       /* ---------- ticker ---------- */
@@ -421,7 +427,7 @@
       .channel-card .btn { margin-top: auto; justify-content: center; }
 
       /* ---------- textures ---------- */
-      .tex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: 18px; }
+      .tex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 14px; }
       .tex-card {
         background: var(--panel); border: 1px solid var(--line-soft);
         border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
@@ -467,6 +473,38 @@
       .tex-cta:hover .tex-cta-btn { background: #f2172a; }
       .tex-cta-btn svg { width: 17px; height: 17px; flex: none; }
 
+      /* ---------- asset loader guide banner (home) ---------- */
+      .guide-banner {
+        margin-top: 34px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+        background: linear-gradient(150deg, rgba(212,160,23,.16) 0%, var(--panel) 62%);
+        border: 1px solid rgba(212,160,23,.55);
+        border-radius: var(--radius); padding: 26px 28px; text-decoration: none;
+        transition: border-color .15s;
+      }
+      .guide-banner:hover { border-color: var(--gold); }
+      .guide-banner .g-icon {
+        flex: none; width: 52px; height: 52px; border-radius: 12px;
+        background: var(--gold); color: #141005;
+        display: grid; place-items: center;
+      }
+      .guide-banner .g-icon svg { width: 26px; height: 26px; }
+      .guide-banner .kick {
+        direction: ltr; font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px;
+      }
+      .guide-banner h2 { margin: 0; font-size: clamp(22px, 3.6vw, 28px); font-weight: 800; line-height: 1.3; }
+      .guide-banner p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+      .guide-banner-btn {
+        margin-inline-start: auto; display: inline-flex; align-items: center; gap: 9px;
+        background: var(--gold); color: #141005; font-weight: 800; font-size: 15.5px;
+        padding: 13px 24px; border-radius: 10px; white-space: nowrap; transition: background .15s;
+      }
+      .guide-banner:hover .guide-banner-btn { background: #eab616; }
+      .guide-banner-btn svg { width: 17px; height: 17px; flex: none; }
+      @media (max-width: 560px) {
+        .guide-banner-btn { margin-inline-start: 0; width: 100%; justify-content: center; }
+      }
+
       /* ---------- textures page ---------- */
       .tex-page { padding-top: 40px; }
       .page-head { margin-bottom: 30px; }
@@ -488,6 +526,76 @@
       .back-row { margin-top: 28px; }
       .back-row .back-link { margin-bottom: 0; }
       .tex-set-title { margin: 38px 0 16px; font-size: clamp(20px, 3.4vw, 25px); font-weight: 800; line-height: 1.35; }
+
+      /* ---------- asset loader guide ---------- */
+      .guide-sec {
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); padding: 24px 26px; margin-bottom: 18px;
+      }
+      .guide-sec h3 { margin: 0 0 12px; font-size: 19px; font-weight: 800; line-height: 1.4; }
+      .guide-sec h4 { margin: 20px 0 8px; font-size: 16px; font-weight: 800; }
+      .guide-sec p { margin: 0 0 10px; color: var(--muted); font-size: 15.5px; }
+      .guide-sec p:last-child { margin-bottom: 0; }
+      .guide-sec b { color: var(--text); }
+      .guide-sec ul { margin: 0; padding-inline-start: 20px; color: var(--muted); font-size: 15.5px; }
+      .guide-sec li { margin-bottom: 7px; }
+      .guide-sec li:last-child { margin-bottom: 0; }
+      .gcode {
+        direction: ltr; display: inline-block; unicode-bidi: isolate;
+        font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+        font-size: 0.88em; font-weight: 600; color: #ffc9ce;
+        background: var(--bg-2); border: 1px solid var(--line);
+        border-radius: 6px; padding: 0 7px; line-height: 1.6;
+      }
+      .codeblock {
+        direction: ltr; text-align: left; unicode-bidi: isolate;
+        font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+        font-size: 13.5px; line-height: 1.85; color: #ffd9dc;
+        background: var(--bg-2); border: 1px solid var(--line);
+        border-radius: 10px; padding: 14px 16px; margin: 12px 0;
+        white-space: pre-wrap; overflow-wrap: anywhere;
+      }
+      .codeblock:last-child { margin-bottom: 0; }
+      .guide-note {
+        margin-top: 12px; background: var(--red-soft);
+        border: 1px solid rgba(225,6,26,.4); border-radius: 10px;
+        padding: 13px 16px; color: var(--text); font-size: 15px;
+      }
+      .guide-note b { color: #ff9aa4; }
+      .gtable { width: 100%; border-collapse: collapse; font-size: 14.5px; margin-top: 6px; }
+      .gtable th {
+        text-align: right; font-weight: 800; color: var(--text);
+        background: var(--panel-2); padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      .gtable td { padding: 10px 12px; border-bottom: 1px solid var(--line-soft); color: var(--muted); vertical-align: top; }
+      .gtable tr:last-child td { border-bottom: 0; }
+      .gtable .ltr-cell {
+        direction: ltr; text-align: left;
+        font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+        font-size: 13px; color: #ffd9dc; overflow-wrap: anywhere;
+      }
+      .code-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 10px; margin: 12px 0 4px; }
+      .code-chip {
+        direction: ltr; display: flex; align-items: baseline; gap: 9px;
+        background: var(--bg-2); border: 1px solid var(--line);
+        border-radius: 9px; padding: 8px 12px;
+        font-family: "Archivo", sans-serif; font-size: 13.5px;
+      }
+      .code-chip b { color: #ffd9dc; font-weight: 800; white-space: nowrap; }
+      .code-chip span { color: var(--muted); }
+      @media (max-width: 640px) {
+        .guide-sec { padding: 20px 18px; }
+        .gtable thead { display: none; }
+        .gtable, .gtable tbody, .gtable tr, .gtable td { display: block; width: 100%; }
+        .gtable tr { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+        .gtable tr:last-child { border-bottom: 0; }
+        .gtable td { border-bottom: 0; padding: 3px 0; }
+        .gtable td::before {
+          content: attr(data-label); display: block;
+          font-size: 12px; font-weight: 700; color: var(--muted-2); margin-bottom: 2px;
+        }
+      }
 
       /* ---------- footer ---------- */
       footer {
@@ -521,6 +629,7 @@
           <a href="#next-event">رویداد بعدی</a>
           <a href="#champions">قهرمانان</a>
           <a href="#textures">دانلود تکسچر</a>
+          <a href="#asset-loader">آموزش Asset Loader</a>
           <a href="#about">درباره</a>
         </nav>
         <a class="btn-rubika" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
@@ -542,6 +651,10 @@
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
             تماشای شوها در روبیکا
           </a>
+          <a class="btn btn-gold" href="#asset-loader">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            آموزش کار با Asset Loader
+          </a>
           <a class="btn btn-ghost" href="#results">نتایج سامراسلم</a>
         </div>
       </div>
@@ -556,6 +669,22 @@
     <main class="wrap" id="view-home">
 
       <p class="site-visits" id="siteVisits" hidden>بازدید سایت: <b id="siteVisitsNum"></b></p>
+
+      <!-- ======= ASSET LOADER GUIDE BANNER ======= -->
+      <a class="guide-banner" href="#asset-loader">
+        <span class="g-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </span>
+        <div>
+          <div class="kick">Asset Loader Guide</div>
+          <h2>آموزش کار با Asset Loader</h2>
+          <p>راهنمای فارسی و قدم‌به‌قدم اضافه کردن تکسچر، تایتان‌ترون و آهنگ ورودی به Wrestling Empire Legacy — از ساخت پوشه ماد تا عیب‌یابی.</p>
+        </div>
+        <span class="guide-banner-btn">
+          مشاهده آموزش
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        </span>
+      </a>
 
       <!-- ======= NEWS ======= -->
       <section id="news">
@@ -1388,6 +1517,222 @@
       </section>
     </main>
 
+    <!-- ======= ASSET LOADER GUIDE PAGE (separate view, opened via #asset-loader) ======= -->
+    <main class="wrap" id="view-guide" hidden>
+      <section class="tex-page" id="guidePage">
+        <div class="page-head">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگشت به صفحه اصلی
+          </a>
+          <div class="kick">Asset Loader Guide</div>
+          <h1>آموزش کار با Asset Loader</h1>
+          <p>راهنمای مادینگ Asset Loader در Wrestling Empire Legacy — چطور بدون بازسازی بازی، لباس، تایتان‌ترون، آهنگ ورودی و تکسچر جایگزین اضافه کنیم. تهیه‌شده توسط CXGStudios</p>
+        </div>
+
+        <div class="guide-sec">
+          <h3>شروع سریع</h3>
+          <p>Asset Loader به بازیکن اجازه می‌ده فایل‌ها رو توی یه پوشه معمولی بیرون از بازی بذاره. وقتی بازی شروع می‌شه یا دکمه Asset Loader زده می‌شه، بازی اون پوشه رو بررسی می‌کنه و آیتم‌های پشتیبانی‌شده رو به‌صورت خودکار اضافه یا جایگزین می‌کنه.</p>
+          <h4>اولین قدم</h4>
+          <ul>
+            <li>بازی رو یک بار اجرا کن.</li>
+            <li>از طریق دکمه Asset Loader منوی «CXGStudios» رو باز کن.</li>
+            <li>روی Asset Loader کلیک کن. بازی پوشه‌های ماد رو می‌سازه و خودش برات بازشون می‌کنه.</li>
+            <li>قبل از اضافه کردن تعداد زیادی فایل، بازی رو ببند و بعد از کپی کردن فایل‌ها دوباره اجراش کن.</li>
+          </ul>
+        </div>
+
+        <div class="guide-sec">
+          <h3>پوشه ماد در PC</h3>
+          <div class="codeblock">C:\Users\ADMIN\AppData\LocalLow\CXGStudios\Wrestling Empire Legacy\WrestlingEmpireMods</div>
+          <p>(به‌جای <span class="gcode">ADMIN</span> نام کاربری ویندوز خودت رو بذار)</p>
+        </div>
+
+        <div class="guide-sec">
+          <h3>پوشه ماد در اندروید</h3>
+          <p>در اندروید، از پوشه‌ای استفاده کن که از طریق انتخاب‌گر پوشه داخل بازی (Asset Loader) انتخاب کردی. بازی همون ساختار پوشه‌ها رو داخل محل انتخاب‌شده می‌سازه.</p>
+          <div class="guide-note"><b>مهم:</b> کاربران اندروید اگه از انتخاب‌گر پوشه داخل بازی استفاده کنن، به <span dir="ltr">Shizuku</span> یا دسترسی مستقیم به پوشه محافظت‌شده دیتای بازی نیازی ندارن.</div>
+        </div>
+
+        <div class="guide-sec">
+          <h3>دو نوع فایل ماد</h3>
+          <ul>
+            <li><b>اسلات‌های قابل‌اضافه:</b> شماره‌های جدید قابل‌انتخاب بعد از حد اصلی بازی اضافه می‌کنن. مثال: <span class="gcode">face323.png</span> ،<span class="gcode">Theme124.mp3</span> ،<span class="gcode">26.mp4</span></li>
+            <li><b>فایل‌های جایگزین:</b> یه تکسچر موجود رو با همون اسم جایگزین می‌کنن. اسلات جدید اضافه نمی‌کنن. مثال: <span class="gcode">Fed01.png</span> ،<span class="gcode">Fed01_Texture01.png</span> ،<span class="gcode">canvas_logo04.png</span></li>
+          </ul>
+        </div>
+
+        <div class="guide-sec">
+          <h3>ساختار پوشه‌ها</h3>
+          <p>بعد از زدن Asset Loader، بازی این ساختار پوشه رو می‌سازه. فایل‌ها رو فقط توی پوشه مربوط به همون نوع آیتم بذار.</p>
+          <div class="codeblock">WrestlingEmpireMods
+  Costumes
+    Faces, Bodies, Legs, Arms, Hands, Hair, Masks, Beards, Necks, Scars, Footwear, Body Patterns, Leg Patterns, Accessories
+  Titantrons, Themes, Feds, Belts, Canvas, Apron</div>
+        </div>
+
+        <div class="guide-sec">
+          <h3>قوانین کلی فایل‌ها</h3>
+          <ul>
+            <li>اسم‌ها باید دقیقاً مثل مثال‌ها باشن، مخصوصاً حروف بزرگ و کوچک و شماره‌ها.</li>
+            <li>فایل‌های عکس می‌تونن <span class="gcode">PNG</span> یا <span class="gcode">JPG</span> یا <span class="gcode">JPEG</span> باشن.</li>
+            <li>فایل‌های آهنگ باید <span class="gcode">MP3</span> باشن.</li>
+            <li>فایل‌های تایتان‌ترون باید <span class="gcode">MP4</span> باشن.</li>
+            <li>قالب شماره‌گذاری هر نوع آیتم رو رعایت کن، مگر اینکه پایین‌تر خلافش گفته شده باشه.</li>
+            <li>اگه چیزی ظاهر نشد، بعد از اضافه کردن فایل‌ها بازی رو ری‌استارت کن.</li>
+          </ul>
+        </div>
+
+        <div class="guide-sec">
+          <h3>اسلات‌های لباس</h3>
+          <p>تکسچرهای لباس قابل‌اضافه‌ان. اگه آخرین صورت اصلی 322 باشه، اضافه کردن <span class="gcode">face323.png</span> اسلات 323 رو در دسترس قرار می‌ده. تعداد اسلات‌ها بر اساس بالاترین فایل با اسم صحیح مشخص می‌شه.</p>
+          <table class="gtable">
+            <thead>
+              <tr><th>پوشه</th><th>مثال اسم فایل</th><th>کاربرد</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="مثال اسم فایل">face323.png, face_female35.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر صورت</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Bodies</td><td class="ltr-cell" data-label="مثال اسم فایل">body312.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر بدن</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Legs</td><td class="ltr-cell" data-label="مثال اسم فایل">legs313.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر پا</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Arms</td><td class="ltr-cell" data-label="مثال اسم فایل">arm262.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر بازو</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Hands</td><td class="ltr-cell" data-label="مثال اسم فایل">glove27.png</td><td data-label="کاربرد">اضافه کردن اسلات دستکش/دست</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Masks</td><td class="ltr-cell" data-label="مثال اسم فایل">Mask45.png</td><td data-label="کاربرد">اضافه کردن اسلات ماسک</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Footwear</td><td class="ltr-cell" data-label="مثال اسم فایل">shoes30.png, laces18.png</td><td data-label="کاربرد">اضافه کردن اسلات کفش/بند کفش</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Necks</td><td class="ltr-cell" data-label="مثال اسم فایل">collar17.png</td><td data-label="کاربرد">اضافه کردن اسلات یقه/گردن</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Hair</td><td class="ltr-cell" data-label="مثال اسم فایل">hair13.png, hair_alpha06.png, shave19.png</td><td data-label="کاربرد">اضافه کردن اسلات مو و اصلاح</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Beards</td><td class="ltr-cell" data-label="مثال اسم فایل">beard22.png</td><td data-label="کاربرد">اضافه کردن اسلات ریش</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Body Patterns</td><td class="ltr-cell" data-label="مثال اسم فایل">body_pattern117.png</td><td data-label="کاربرد">اضافه کردن اسلات طرح بدن</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Leg Patterns</td><td class="ltr-cell" data-label="مثال اسم فایل">legs_pattern58.png, kneepads16.png</td><td data-label="کاربرد">اضافه کردن اسلات طرح پا/زانوبند</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Accessories</td><td class="ltr-cell" data-label="مثال اسم فایل">pad31.png, wristband23.png</td><td data-label="کاربرد">اضافه کردن اسلات پد و مچ‌بند</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:14px">مثال:</p>
+          <div class="codeblock">WrestlingEmpireMods\Costumes\Faces\face323.png</div>
+        </div>
+
+        <div class="guide-sec">
+          <h3>تایتان‌ترون و آهنگ‌ها</h3>
+          <p>تایتان‌ترون و آهنگ‌های ورودی قابل‌اضافه‌ان. بازی اسلات‌ها رو بر اساس بالاترین شماره فایل داخل پوشه اضافه می‌کنه.</p>
+          <ul>
+            <li><b>تایتان‌ترون</b> — پوشه <span class="gcode">Titantrons</span> — اسم <span class="gcode">26.mp4</span> — فقط <span class="gcode">MP4</span>. برای بهترین سازگاری از <span class="gcode">H.264/AAC</span> استفاده کن.</li>
+            <li><b>آهنگ ورودی</b> — پوشه <span class="gcode">Themes</span> — اسم <span class="gcode">Theme124.mp3</span> یا <span class="gcode">Theme 124.mp3</span> یا <span class="gcode">124.mp3</span> — فقط <span class="gcode">MP3</span>. اگه با فرمت <span class="gcode">MP4</span> ذخیره شده باشه، پخش نمی‌شه.</li>
+          </ul>
+          <p style="margin-top:12px">مثال‌ها:</p>
+          <div class="codeblock">WrestlingEmpireMods\Titantrons\26.mp4
+WrestlingEmpireMods\Themes\Theme124.mp3</div>
+        </div>
+
+        <div class="guide-sec">
+          <h3>تنظیمات پیشنهادی فایل‌های رسانه‌ای</h3>
+          <ul>
+            <li><b>تایتان‌ترون:</b> <span class="gcode">MP4</span>، ویدیو <span class="gcode">H.264</span>، صدای <span class="gcode">AAC</span>، کیفیت <span class="gcode">720p</span> یا <span class="gcode">1080p</span>.</li>
+            <li><b>آهنگ:</b> <span class="gcode">MP3</span>، بیت‌ریت 128 تا 320 <span class="gcode">kbps</span>، استریو.</li>
+            <li>فایل‌ها رو به‌اندازه فشرده نگه دار. فایل‌های رسانه‌ای خیلی بزرگ می‌تونن لود بازی رو کند کنن یا فضای دیسک رو هدر بدن.</li>
+          </ul>
+        </div>
+
+        <div class="guide-sec">
+          <h3>تکسچرهای جایگزین</h3>
+          <p>این فایل‌ها تکسچرهای موجود داخل بازی رو جایگزین می‌کنن. اسلات جدید قابل‌انتخاب اضافه نمی‌کنن. از اسم دقیق آیتم اصلی استفاده کن.</p>
+          <ul>
+            <li><span class="gcode">Feds</span> — <span class="gcode">Fed01.png</span> ،<span class="gcode">Fed02.png</span> ،<span class="gcode">Fed03.png</span> — لوگوی فدراسیون‌ها</li>
+            <li><span class="gcode">Belts</span> — <span class="gcode">Fed01_Texture01.png</span> ،<span class="gcode">Fed01_Texture02.png</span> — تکسچر کمربند قهرمانی هر فدراسیون/عنوان</li>
+            <li><span class="gcode">Canvas</span> — <span class="gcode">canvas_logo04.png</span> ،<span class="gcode">canvas05.png</span> — کف رینگ و لوگوی کف رینگ</li>
+            <li><span class="gcode">Apron</span> — <span class="gcode">apron_logo27.png</span> ،<span class="gcode">apron_white.png</span> — تکسچر/لوگوی پیش‌بند رینگ</li>
+          </ul>
+          <h4>کدهای فدراسیون</h4>
+          <div class="code-grid">
+            <div class="code-chip"><b>Fed00</b><span>Legends</span></div>
+            <div class="code-chip"><b>Fed01</b><span>RAW</span></div>
+            <div class="code-chip"><b>Fed02</b><span>Smackdown</span></div>
+            <div class="code-chip"><b>Fed03</b><span>NXT</span></div>
+            <div class="code-chip"><b>Fed04</b><span>NJPW</span></div>
+            <div class="code-chip"><b>Fed05</b><span>AEW</span></div>
+            <div class="code-chip"><b>Fed06</b><span>AAA</span></div>
+            <div class="code-chip"><b>Fed07</b><span>ROH</span></div>
+            <div class="code-chip"><b>Fed09</b><span>TNA</span></div>
+            <div class="code-chip"><b>Fed10</b><span>Free Agents</span></div>
+          </div>
+          <h4>کدهای عنوان/کمربند (<span class="gcode">Fed01_Texture01</span>)</h4>
+          <div class="code-grid">
+            <div class="code-chip"><b>Texture01</b><span>World Title</span></div>
+            <div class="code-chip"><b>Texture02</b><span>Inter Title</span></div>
+            <div class="code-chip"><b>Texture03</b><span>Women's Title</span></div>
+            <div class="code-chip"><b>Texture04</b><span>Tag title</span></div>
+          </div>
+          <p style="margin-top:14px">مثال‌ها:</p>
+          <div class="codeblock">WrestlingEmpireMods\Feds\Fed01.png
+WrestlingEmpireMods\Belts\Fed01_Texture01.png
+WrestlingEmpireMods\Canvas\canvas_logo04.png
+WrestlingEmpireMods\Apron\apron_logo27.png</div>
+        </div>
+
+        <div class="guide-sec">
+          <h3>توصیه‌های عکس</h3>
+          <ul>
+            <li>تا جایی که ممکنه از همون ابعاد تکسچر اصلی استفاده کن.</li>
+            <li>برای شفافیت از <span class="gcode">PNG</span> استفاده کن.</li>
+            <li>از عکس‌های خیلی بزرگ خودداری کن. هم‌اندازه بودن با سایز اصلی بهترین عملکرد رو می‌ده.</li>
+            <li>اگه یه تکسچر سفید دیده شد، ممکنه فایل خراب، پشتیبانی‌نشده یا با اسم اشتباه باشه.</li>
+          </ul>
+        </div>
+
+        <div class="guide-sec">
+          <h3>عیب‌یابی</h3>
+          <ul>
+            <li><b>اسلات جدید ظاهر می‌شه ولی تکسچر سفیده</b> — شماره اسلات شناسایی شده ولی عکس لود نشده. راه‌حل: فرمت <span class="gcode">PNG/JPG</span>، اسم فایل و ابعاد عکس رو بررسی کن. یه <span class="gcode">PNG</span> کوچک‌تر رو امتحان کن.</li>
+            <li><b>اسلات آهنگ ظاهر می‌شه ولی موزیک پخش نمی‌شه</b> — فایل <span class="gcode">MP3</span> نیست یا اسمش اشتباهه. راه‌حل: از <span class="gcode">Theme124.mp3</span> یا <span class="gcode">Theme 124.mp3</span> یا <span class="gcode">124.mp3</span> استفاده کن.</li>
+            <li><b>اسلات تایتان‌ترون ظاهر می‌شه ولی ویدیو پخش نمی‌شه</b> — کدک <span class="gcode">MP4</span> پشتیبانی نمی‌شه یا اسم اشتباهه. راه‌حل: از <span class="gcode">26.mp4</span> با کدک ویدیویی <span class="gcode">H.264</span> و صدای <span class="gcode">AAC</span> استفاده کن.</li>
+            <li><b>لوگوی فدراسیون جایگزین نشد</b> — پوشه یا اسم اشتباهه. راه‌حل: دقیقاً از <span class="gcode">Feds/Fed01.png</span> استفاده کن.</li>
+            <li><b>بازی موقع مرور تکسچرها لگ می‌زنه</b> — عکس‌های خیلی بزرگ یا تعداد زیاد آیتم‌های سنگین. راه‌حل: تکسچرها رو به ابعاد اصلی تغییر سایز بده و عکس‌ها رو فشرده کن.</li>
+            <li><b>فایل‌ها بعد از کپی ظاهر نمی‌شن</b> — بازی لیست پوشه‌ها رو قبلاً کش کرده. راه‌حل: بازی رو ری‌استارت کن یا دوباره Asset Loader رو بزن.</li>
+          </ul>
+        </div>
+
+        <div class="guide-sec">
+          <h3>بهترین روش برای پک‌های ماد</h3>
+          <ul>
+            <li>فقط پوشه‌هایی رو بذار که پکت ازشون استفاده می‌کنه.</li>
+            <li>یه فایل متنی نگه دار که همه آیتم‌های تغییرکرده رو لیست کنه.</li>
+            <li>بدون بکاپ گرفتن از فایل‌ها، روی پک ماد دیگه‌ای بازنویسی نکن.</li>
+            <li>برای تست تمیز، موقتاً همه فایل‌های دیگه رو از <span class="gcode">WrestlingEmpireMods</span> بیرون ببر.</li>
+          </ul>
+        </div>
+
+        <div class="guide-sec">
+          <h3>جدول سریع نام‌گذاری</h3>
+          <table class="gtable">
+            <thead>
+              <tr><th>کار</th><th>پوشه</th><th>اسم فایل</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="کار">اضافه کردن اسلات صورت 323</td><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="اسم فایل">face323.png</td></tr>
+              <tr><td data-label="کار">اضافه کردن اسلات صورت زنانه 35</td><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="اسم فایل">face_female35.png</td></tr>
+              <tr><td data-label="کار">اضافه کردن اسلات بدن 312</td><td class="ltr-cell" data-label="پوشه">Costumes/Bodies</td><td class="ltr-cell" data-label="اسم فایل">body312.png</td></tr>
+              <tr><td data-label="کار">اضافه کردن اسلات تایتان‌ترون 26</td><td class="ltr-cell" data-label="پوشه">Titantrons</td><td class="ltr-cell" data-label="اسم فایل">26.mp4</td></tr>
+              <tr><td data-label="کار">اضافه کردن اسلات آهنگ 124</td><td class="ltr-cell" data-label="پوشه">Themes</td><td class="ltr-cell" data-label="اسم فایل">Theme124.mp3</td></tr>
+              <tr><td data-label="کار">جایگزینی لوگوی فدراسیون RAW</td><td class="ltr-cell" data-label="پوشه">Feds</td><td class="ltr-cell" data-label="اسم فایل">Fed01.png</td></tr>
+              <tr><td data-label="کار">جایگزینی کمربند اصلی قهرمانی جهان</td><td class="ltr-cell" data-label="پوشه">Belts</td><td class="ltr-cell" data-label="اسم فایل">Fed01_Texture01.png</td></tr>
+              <tr><td data-label="کار">جایگزینی لوگوی کف رینگ 04</td><td class="ltr-cell" data-label="پوشه">Canvas</td><td class="ltr-cell" data-label="اسم فایل">canvas_logo04.png</td></tr>
+              <tr><td data-label="کار">جایگزینی لوگوی پیش‌بند رینگ 27</td><td class="ltr-cell" data-label="پوشه">Apron</td><td class="ltr-cell" data-label="اسم فایل">apron_logo27.png</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="guide-sec">
+          <h3>نکته پایانی</h3>
+          <p>آیتم‌های قابل‌اضافه بر اساس بالاترین فایل معتبر شماره‌گذاری‌شده دنبال می‌شن. آیتم‌های جایگزین فقط اسم‌های موجود رو بازنویسی می‌کنن. اگه شک داری، Asset Loader رو بزن، مسیر پوشه رو تأیید کن، یه فایل تستی اضافه کن، بازی رو ری‌استارت کن و قبل از اضافه کردن یه پک کامل، بررسی کن.</p>
+        </div>
+
+        <div class="back-row">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگشت به صفحه اصلی
+          </a>
+        </div>
+      </section>
+    </main>
+
     <footer>
       <div class="wrap foot">
         <div>
@@ -1401,6 +1746,7 @@
           <a href="#next-event">رویداد بعدی — الیمینیشن چمبر</a>
           <a href="#champions">قهرمانان فعلی</a>
           <a href="#textures">دانلود تکسچر</a>
+          <a href="#asset-loader">آموزش کار با Asset Loader</a>
           <a href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">کانال روبیکا — @wr3duniverse</a>
         </nav>
       </div>
@@ -1413,28 +1759,32 @@
         if (track) track.innerHTML += track.innerHTML;
       })();
 
-      // Two views in one page: home, and the textures page opened via #textures.
+      // Three views in one page: home, the textures page opened via
+      // #textures, and the Asset Loader guide opened via #asset-loader.
       (function () {
         var home = document.getElementById('view-home');
         var tex = document.getElementById('view-textures');
+        var guide = document.getElementById('view-guide');
         var hero = document.getElementById('top');
         var ticker = document.getElementById('tickerBar');
         if (!home || !tex) return;
         function route() {
-          if (location.hash === '#textures') {
-            home.hidden = true;
-            tex.hidden = false;
-            if (hero) hero.hidden = true;
-            if (ticker) ticker.hidden = true;
+          var hash = location.hash;
+          var sub = hash === '#textures' ? tex : (hash === '#asset-loader' ? guide : null);
+          home.hidden = !!sub;
+          tex.hidden = sub !== tex;
+          if (guide) guide.hidden = sub !== guide;
+          if (hero) hero.hidden = !!sub;
+          if (ticker) ticker.hidden = !!sub;
+          if (hash === '#textures') {
             document.title = 'دانلود تکسچر — WR3D Universe';
             window.scrollTo(0, 0);
+          } else if (hash === '#asset-loader') {
+            document.title = 'آموزش کار با Asset Loader — WR3D Universe';
+            window.scrollTo(0, 0);
           } else {
-            tex.hidden = true;
-            home.hidden = false;
-            if (hero) hero.hidden = false;
-            if (ticker) ticker.hidden = false;
             document.title = 'WR3D Universe';
-            var id = location.hash.replace('#', '');
+            var id = hash.replace('#', '');
             if (id && id !== 'top') {
               var el = document.getElementById(id);
               if (el) el.scrollIntoView();
