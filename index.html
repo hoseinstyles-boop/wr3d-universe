@@ -9,7 +9,7 @@
     <meta name="description" content="WR3D Universe — شوهای بوکینگ Wrestling Empire؛ نتایج شوها و قهرمانان فعلی" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Cinzel:wght@700;800;900&family=Oswald:wght@500;600;700&family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <style>
       :root {
         --bg: #0a0a0c;
@@ -253,6 +253,71 @@
       .storyline .mark svg { width: 21px; height: 21px; }
       .storyline h3 { margin: 0 0 4px; font-size: 17.5px; font-weight: 800; }
       .storyline p { margin: 0; color: var(--muted); font-size: 15px; }
+
+      /* ---------- event results blocks ---------- */
+      .event-block { margin-top: 46px; }
+      .event-logo-title { direction: ltr; text-align: left; margin: 0 0 18px; line-height: 0; }
+      .event-logo { display: block; height: auto; }
+      .event-logo-noc { width: min(290px, 80vw); }
+      .event-logo-ss { width: min(440px, 90vw); }
+      .coming-soon {
+        direction: ltr; text-align: left;
+        background: var(--panel); border: 1px dashed rgba(212,160,23,.5);
+        border-radius: var(--radius); padding: 30px 26px;
+      }
+      .coming-soon .cs-title {
+        font-family: "Cinzel", serif; font-weight: 700; font-size: 20px;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+      }
+      .coming-soon p { margin: 8px 0 0; color: var(--muted); font-family: "Archivo", sans-serif; font-size: 15px; }
+      .result-note {
+        direction: ltr; text-align: left; margin-top: 5px;
+        font-family: "Archivo", sans-serif; font-size: 13.5px; font-weight: 600; color: var(--muted);
+      }
+      .result-note.tbd-note { color: #ff9aa4; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; }
+
+      /* Persian (RTL) match cards — event results pages */
+      #event-summerslam .vs, #event-night-of-champions .vs {
+        direction: rtl; text-align: right;
+        font-family: "Vazirmatn", sans-serif; font-size: 17px; line-height: 1.6;
+      }
+      #event-summerslam .vs .def, #event-night-of-champions .vs .def { font-size: 13.5px; }
+      #event-summerslam .result-note, #event-night-of-champions .result-note {
+        direction: rtl; text-align: right;
+        font-family: "Vazirmatn", sans-serif; font-size: 14.5px;
+      }
+      #event-summerslam .result-note b, #event-night-of-champions .result-note b { color: #fff; font-weight: 800; }
+      #event-summerslam .result-note.tbd-note { letter-spacing: 0; text-transform: none; }
+
+      /* ---------- event picker (results view) ---------- */
+      .event-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      @media (max-width: 640px) { .event-picker { grid-template-columns: 1fr; } }
+      .event-pick {
+        appearance: none; cursor: pointer; font-family: inherit; text-align: center;
+        background: var(--panel); border: 1px solid var(--line-soft);
+        border-radius: var(--radius); padding: 28px 22px 22px;
+        display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 20px;
+        transition: border-color .15s, background .15s, box-shadow .15s;
+      }
+      .event-pick:hover { border-color: var(--muted-2); }
+      .event-pick:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+      .event-pick img { height: 96px; width: auto; max-width: 100%; object-fit: contain; }
+      .event-pick.active { border-color: var(--red); background: var(--panel-2); box-shadow: 0 0 0 1px var(--red); }
+      .pick-meta { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+      .pick-status {
+        font-family: "Archivo", sans-serif; font-size: 12px; font-weight: 800;
+        letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+      }
+      .pick-cta {
+        font-family: "Archivo", sans-serif; font-size: 13px; font-weight: 800;
+        letter-spacing: 0.1em; text-transform: uppercase; color: #fff;
+        background: var(--red); border-radius: 999px; padding: 6px 16px;
+      }
+      .event-pick[data-event="night-of-champions"] .pick-cta { background: var(--gold); color: #141005; }
+      .pick-hint { color: var(--muted-2); font-size: 14.5px; text-align: center; margin: 20px 0 0; }
+      .event-page { margin-top: 38px; scroll-margin-top: 84px; }
+      .event-logo-title.center { text-align: center; }
+      .event-logo-title.center .event-logo { margin: 0 auto; }
 
       /* ---------- rate the event ---------- */
       .rate-card {
@@ -624,7 +689,7 @@
         <a class="brand" href="#top" dir="ltr"><b>WR3D</b> <span>UNIVERSE</span></a>
         <nav class="nav">
           <a href="#news">اخبار</a>
-          <a href="#results">نتایج شوها</a>
+          <a href="#results">نتایج رویدادها</a>
           <a href="#rate">نمره به رویداد</a>
           <a href="#next-event">رویداد بعدی</a>
           <a href="#champions">قهرمانان</a>
@@ -655,7 +720,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
             آموزش کار با Asset Loader
           </a>
-          <a class="btn btn-ghost" href="#results">نتایج سامراسلم</a>
+          <a class="btn btn-ghost" href="#results">نتایج رویدادها</a>
         </div>
       </div>
     </div>
@@ -705,137 +770,6 @@
             <div class="news-date">۳۰ آبان ۱۴۰۵</div>
             <p>وقفه ای که در سامراسلم افتاده با مسابقه فیند و رندی جبران میشه چون یکی از شاهکار ترین مسابقه های یونیورس خواهد بود. اخبار جدید بزودی..</p>
           </article>
-        </div>
-      </section>
-
-      <!-- ======= RESULTS ======= -->
-      <section id="results">
-        <div class="sec-head reveal">
-          <div>
-            <div class="kick">Latest Event Results</div>
-            <h2>نتایج سامراسلم — دو شب</h2>
-          </div>
-          <p class="side">بزرگ‌ترین شو تابستان WR3D Universe در دو شب برگزار شد؛ سه کمربند در شب اول و سه کمربند در شب دوم روی خط بودند.</p>
-        </div>
-
-        <div class="nights">
-          <article class="night reveal">
-            <div class="night-head">
-              <span class="n">NIGHT 1</span>
-              <h3>شب اول</h3>
-              <span class="en-name">SummerSlam</span>
-            </div>
-
-            <div class="match">
-              <div class="vs"><span class="w">Oba Femi</span> <span class="def">DEF.</span> <span class="l">Solo Sikoa</span></div>
-              <div class="tags"><span class="tag">مسابقه تک‌نفره</span></div>
-              <figure class="spoiler-shot">
-                <a href="assets/spoiler-femi-sikoa.jpg" target="_blank" rel="noopener">
-                  <img src="assets/spoiler-femi-sikoa.jpg" alt="اوبا فمی ایستاده در رینگ سامراسلم بعد از پیروزی مقابل سولو سیکوا که روی زمین افتاده است" loading="lazy" />
-                </a>
-                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
-              </figure>
-            </div>
-
-            <div class="match">
-              <div class="vs"><span class="w">Drew McIntyre</span> <span class="def">DEF.</span> <span class="l">Adam Cole</span></div>
-              <div class="tags">
-                <span class="tag title">Intercontinental Championship</span>
-                <span class="tag">کمربند حفظ شد</span>
-              </div>
-              <figure class="spoiler-shot">
-                <a href="assets/spoiler-mcintyre-cole.jpg" target="_blank" rel="noopener">
-                  <img src="assets/spoiler-mcintyre-cole.jpg" alt="درو مک‌اینتایر با کمربند اینترکانتیننتال در رینگ سامراسلم، بعد از پیروزی مقابل آدام کول" loading="lazy" />
-                </a>
-                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
-              </figure>
-            </div>
-
-            <div class="match">
-              <div class="vs"><span class="w">CM Punk</span> <span class="def">DEF.</span> <span class="l">Gunther</span></div>
-              <div class="tags">
-                <span class="tag stip">Hardcore Match</span>
-                <span class="tag">با دخالت رندی اورتن</span>
-              </div>
-              <figure class="spoiler-shot">
-                <a href="assets/spoiler-punk-gunther.jpg" target="_blank" rel="noopener">
-                  <img src="assets/spoiler-punk-gunther.jpg" alt="سی‌ام پانک ایستاده در رینگ سامراسلم کنار گانتر که روی زمین افتاده است، بعد از پیروزی در مسابقه هاردکور" loading="lazy" />
-                </a>
-                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
-              </figure>
-            </div>
-
-            <div class="match">
-              <div class="vs"><span class="w">Finn Bálor</span> <span class="def">DEF.</span> <span class="l">Cody Rhodes</span></div>
-              <div class="tags">
-                <span class="tag title">World Heavyweight Championship</span>
-                <span class="tag">مین‌ایونت شب اول</span>
-                <span class="tag">کمربند حفظ شد</span>
-              </div>
-              <figure class="spoiler-shot">
-                <a href="assets/spoiler-balor-rhodes.jpg" target="_blank" rel="noopener">
-                  <img src="assets/spoiler-balor-rhodes.jpg" alt="فین بالور با کمربند قهرمانی سنگین‌وزن جهان در رینگ سامراسلم، بعد از پیروزی مقابل کودی رودز" loading="lazy" />
-                </a>
-                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
-              </figure>
-            </div>
-          </article>
-
-          <article class="night reveal">
-            <div class="night-head">
-              <span class="n">NIGHT 2</span>
-              <h3>شب دوم</h3>
-              <span class="en-name">SummerSlam</span>
-            </div>
-
-            <div class="match">
-              <div class="vs"><span class="w">Braun Strowman &amp; Erik Rowan</span> <span class="def">DEF.</span> <span class="l">Jacob Fatu &amp; Jimmy Uso</span></div>
-              <div class="tags">
-                <span class="tag title">Universe Tag Team Championship</span>
-                <span class="tag new">قهرمانان جدید</span>
-              </div>
-              <figure class="spoiler-shot">
-                <a href="assets/spoiler-strowman-rowan.jpg" target="_blank" rel="noopener">
-                  <img src="assets/spoiler-strowman-rowan.jpg" alt="بران استرومن و اریک روون با کمربندهای تگ‌تیم یونیورس در رینگ سامراسلم، بعد از پیروزی مقابل جیکوب فاتو و جیمی اوسو که روی زمین افتاده است" loading="lazy" />
-                </a>
-                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
-              </figure>
-            </div>
-
-            <div class="match">
-              <div class="vs"><span class="w">Brock Lesnar</span> <span class="def">DEF.</span> <span class="l">Bron Breakker</span></div>
-              <div class="tags">
-                <span class="tag title">Undisputed Championship</span>
-                <span class="tag">کمربند حفظ شد</span>
-              </div>
-              <figure class="spoiler-shot">
-                <a href="assets/spoiler-lesnar-breakker.jpg" target="_blank" rel="noopener">
-                  <img src="assets/spoiler-lesnar-breakker.jpg" alt="براک لزنر با کمربند آندیسپیوتد در رینگ سامراسلم، بعد از پیروزی مقابل بران بریکر" loading="lazy" />
-                </a>
-                <figcaption>اسپویل تصویری — پایان مسابقه</figcaption>
-              </figure>
-            </div>
-
-            <div class="match">
-              <div class="vs"><span class="l">Randy Orton</span> <span class="def">VS.</span> <span class="l">“The Fiend” Bray Wyatt</span></div>
-              <div class="tags">
-                <span class="tag title">Supertitle</span>
-                <span class="tag stip">Falls Count Anywhere</span>
-                <span class="tag">مین‌ایونت شب دوم</span>
-                <span class="tag">نتیجه هنوز مشخص نشده</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div class="storyline reveal">
-          <div class="mark">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-          </div>
-          <div>
-            <h3>بعد از سامراسلم چه خبر است؟</h3>
-            <p>قراره جنگ برای الیمینیشن چمبر شروع بشه — منتظر راو و اسمکداون باشید.</p>
-          </div>
         </div>
       </section>
 
@@ -1075,6 +1009,266 @@
               عضویت در کانال روبیکا
             </a>
           </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======= EVENT RESULTS PAGE (separate view, opened via #results) ======= -->
+    <main class="wrap" id="view-results" hidden>
+      <section class="tex-page" id="resultsPage">
+        <div class="page-head">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگشت به صفحه اصلی
+          </a>
+          <div class="kick">Event Results</div>
+          <h1>نتایج رویدادها</h1>
+          <p>روی رویداد مورد نظر کلیک کن و نتایجش رو ببین!</p>
+        </div>
+
+        <div class="event-picker" dir="ltr">
+          <button type="button" class="event-pick" data-event="night-of-champions" aria-expanded="false">
+            <img src="assets/logo-night-of-champions.png" alt="Night of Champions" />
+            <span class="pick-meta">
+              <span class="pick-status">Full Results — 6 Matches</span>
+              <span class="pick-cta">View Results</span>
+            </span>
+          </button>
+          <button type="button" class="event-pick" data-event="summerslam" aria-expanded="false">
+            <img src="assets/logo-summerslam.png" alt="SummerSlam" />
+            <span class="pick-meta">
+              <span class="pick-status">Full Results — Two Nights</span>
+              <span class="pick-cta">View Results</span>
+            </span>
+          </button>
+        </div>
+        <p class="pick-hint" id="pickHint">برای دیدن نتایج، یکی از رویدادهای بالا را انتخاب کن.</p>
+
+        <div class="event-page" id="event-summerslam" hidden>
+          <h2 class="event-logo-title center"><img class="event-logo event-logo-ss" src="assets/logo-summerslam.png" alt="SummerSlam" /></h2>
+
+        <div class="nights">
+        <article class="night reveal">
+          <div class="night-head">
+            <span class="n">شب ۱</span>
+            <h3>شب اول</h3>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">اوبا فمی</span> <span class="def">مقابل</span> <span class="l">سولو سیکوا</span></div>
+            <div class="result-note">برنده: <b>اوبا فمی</b></div>
+            <div class="tags"><span class="tag">مسابقه تک‌نفره</span></div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-femi-sikoa.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-femi-sikoa.jpg" alt="Oba Femi standing tall in the SummerSlam ring after defeating Solo Sikoa, who is down on the mat" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">درو مک‌اینتایر</span> <span class="def">مقابل</span> <span class="l">آدم کول</span></div>
+            <div class="result-note">مک‌اینتایر کمربند رو حفظ کرد</div>
+            <div class="tags">
+              <span class="tag title">کمربند اینترکانتینتال</span>
+              <span class="tag">حفظ کمربند</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-mcintyre-cole.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-mcintyre-cole.jpg" alt="Drew McIntyre holding the Intercontinental Championship in the SummerSlam ring after defeating Adam Cole" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">سی‌ام پانک</span> <span class="def">مقابل</span> <span class="l">گانتر</span></div>
+            <div class="result-note">برنده: <b>سی‌ام پانک</b> — رندی اورتن دخالت کرد</div>
+            <div class="tags">
+              <span class="tag stip">هاردکور مچ</span>
+              <span class="tag">دخالت رندی اورتن</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-punk-gunther.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-punk-gunther.jpg" alt="CM Punk standing in the SummerSlam ring next to a downed Gunther after winning their Hardcore Match" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">فین بالور</span> <span class="def">مقابل</span> <span class="l">کودی رودز</span></div>
+            <div class="result-note">بالور کمربند رو حفظ کرد</div>
+            <div class="tags">
+              <span class="tag title">کمربند سنگین وزن</span>
+              <span class="tag">مسابقه اصلی شب اول</span>
+              <span class="tag">حفظ کمربند</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-balor-rhodes.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-balor-rhodes.jpg" alt="Finn Bálor holding the World Heavyweight Championship in the SummerSlam ring after defeating Cody Rhodes" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="night reveal">
+          <div class="night-head">
+            <span class="n">شب ۲</span>
+            <h3>شب دوم</h3>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">براون استرومن و اریک روون</span> <span class="def">مقابل</span> <span class="l">جیکوب فاتو و جیمی اوسو</span></div>
+            <div class="result-note">برنده: <b>استرومن و روون</b> — قهرمان‌های جدید</div>
+            <div class="tags">
+              <span class="tag title">کمربند تگ تیم یونیورس</span>
+              <span class="tag new">قهرمان‌های جدید</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-strowman-rowan.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-strowman-rowan.jpg" alt="Braun Strowman and Erik Rowan holding the Universe Tag Team Championships in the SummerSlam ring after defeating Jacob Fatu and Jimmy Uso" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">براک لزنر</span> <span class="def">مقابل</span> <span class="l">بران بریکر</span></div>
+            <div class="result-note">لزنر کمربند رو حفظ کرد</div>
+            <div class="tags">
+              <span class="tag title">کمربند اندسپیوتد</span>
+              <span class="tag">حفظ کمربند</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-lesnar-breakker.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-lesnar-breakker.jpg" alt="Brock Lesnar holding the Undisputed Championship in the SummerSlam ring after defeating Bron Breakker" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="l">رندی اورتن</span> <span class="def">مقابل</span> <span class="l">«د فیند» بری وایت</span></div>
+            <div class="result-note tbd-note">نتیجه هنوز مشخص نشده</div>
+            <div class="tags">
+              <span class="tag title">کمربند سوپرتایتل</span>
+              <span class="tag stip">فالز کانت انی‌ور</span>
+              <span class="tag">مسابقه اصلی شب دوم</span>
+            </div>
+          </div>
+        </article>
+        </div>
+
+      <div class="storyline reveal">
+        <div class="mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <div>
+          <h3>بعد از سامراسلم چه خبر است؟</h3>
+          <p>قراره جنگ برای الیمینیشن چمبر شروع بشه — منتظر راو و اسمکداون باشید.</p>
+        </div>
+      </div>
+        </div>
+
+        <div class="event-page" id="event-night-of-champions" hidden>
+          <h2 class="event-logo-title center"><img class="event-logo event-logo-noc" src="assets/logo-night-of-champions.png" alt="Night of Champions" /></h2>
+
+        <article class="night reveal">
+          <div class="night-head">
+            <span class="n">کارت کامل</span>
+            <h3>کارت مسابقات و نتایج</h3>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="l">ست رولینز</span> <span class="def">مقابل</span> <span class="w">جی اوسو</span></div>
+            <div class="result-note">برنده: <b>جی اوسو</b></div>
+            <div class="tags">
+              <span class="tag title">کمربند یونایتد استیتس</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-jey-uso-rollins.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-jey-uso-rollins.jpg" alt="جی اوسو با کمربند یونایتد استیتس در رینگ نایت آف چمپیونز بعد از شکست ست رولینز" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="l">لوگان پاول و دامینیک میستریو</span> <span class="def">مقابل</span> <span class="w">جیمی اوسو و جیکوب فاتو</span></div>
+            <div class="result-note">برنده: <b>جیمی اوسو و جیکوب فاتو</b></div>
+            <div class="tags">
+              <span class="tag title">کمربند تگ تیم یونیورس</span>
+            </div>
+            <div class="result-note">بدون عکس</div>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="l">سمی زین</span> <span class="def">مقابل</span> <span class="w">درو مک‌اینتایر</span></div>
+            <div class="result-note">برنده: <b>درو مک‌اینتایر</b></div>
+            <div class="tags">
+              <span class="tag title">کمربند اینترکانتینتال</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-mcintyre-zayn.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-mcintyre-zayn.jpg" alt="درو مک‌اینتایر با کمربند اینترکانتینتال در رینگ نایت آف چمپیونز و سمی زین روی زمین" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">فین بالور</span> <span class="def">مقابل</span> <span class="l">بابی لشلی</span></div>
+            <div class="result-note">برنده: <b>فین بالور</b></div>
+            <div class="tags">
+              <span class="tag title">کمربند سنگین وزن</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-balor-lashley.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-balor-lashley.jpg" alt="فین بالور با کمربند سنگین وزن در رینگ نایت آف چمپیونز و بابی لشلی روی زمین" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="l">ای‌جی استایلز</span> <span class="def">مقابل</span> <span class="w">براک لزنر</span></div>
+            <div class="result-note">برنده: <b>براک لزنر</b></div>
+            <div class="tags">
+              <span class="tag title">کمربند اندسپیوتد</span>
+              <span class="tag stip">تیبلز مچ</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-lesnar-styles.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-lesnar-styles.jpg" alt="براک لزنر با کمربند اندسپیوتد در رینگ نایت آف چمپیونز و ای‌جی استایلز روی میز شکسته" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+
+          <div class="match">
+            <div class="vs"><span class="w">رندی اورتن</span> <span class="def">مقابل</span> <span class="l">رومن رینز</span></div>
+            <div class="result-note">برنده: <b>رندی اورتن</b></div>
+            <div class="tags">
+              <span class="tag title">کمربند سوپرتایتل</span>
+              <span class="tag stip">نو دیسکوالیفیکیشن مچ</span>
+            </div>
+            <figure class="spoiler-shot">
+              <a href="assets/spoiler-orton-reigns.jpg" target="_blank" rel="noopener">
+                <img src="assets/spoiler-orton-reigns.jpg" alt="رندی اورتن با کمربند سوپرتایتل در رینگ نایت آف چمپیونز و رومن رینز روی زمین" loading="lazy" />
+              </a>
+              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+            </figure>
+          </div>
+        </article>
+        </div>
+
+        <div class="back-row">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگشت به صفحه اصلی
+          </a>
         </div>
       </section>
     </main>
@@ -1741,7 +1935,7 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
           <p>شوهای بوکینگ Wrestling Empire — نتایج و قهرمانان، همه در یک جا.</p>
         </div>
         <nav class="foot-links">
-          <a href="#results">نتایج سامراسلم</a>
+          <a href="#results">نتایج رویدادها</a>
           <a href="#rate">نمره به سامراسلم</a>
           <a href="#next-event">رویداد بعدی — الیمینیشن چمبر</a>
           <a href="#champions">قهرمانان فعلی</a>
@@ -1759,10 +1953,12 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
         if (track) track.innerHTML += track.innerHTML;
       })();
 
-      // Three views in one page: home, the textures page opened via
-      // #textures, and the Asset Loader guide opened via #asset-loader.
+      // Four views in one page: home, the event results page opened via
+      // #results, the textures page opened via #textures, and the Asset
+      // Loader guide opened via #asset-loader.
       (function () {
         var home = document.getElementById('view-home');
+        var results = document.getElementById('view-results');
         var tex = document.getElementById('view-textures');
         var guide = document.getElementById('view-guide');
         var hero = document.getElementById('top');
@@ -1770,10 +1966,11 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
         if (!home || !tex) return;
         function route() {
           var hash = location.hash;
-          var sub = hash === '#textures' ? tex : (hash === '#asset-loader' ? guide : null);
+          var sub = hash === '#textures' ? tex : (hash === '#asset-loader' ? guide : (hash === '#results' ? results : null));
           home.hidden = !!sub;
           tex.hidden = sub !== tex;
           if (guide) guide.hidden = sub !== guide;
+          if (results) results.hidden = sub !== results;
           if (hero) hero.hidden = !!sub;
           if (ticker) ticker.hidden = !!sub;
           if (hash === '#textures') {
@@ -1781,6 +1978,9 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
             window.scrollTo(0, 0);
           } else if (hash === '#asset-loader') {
             document.title = 'آموزش کار با Asset Loader — WR3D Universe';
+            window.scrollTo(0, 0);
+          } else if (hash === '#results') {
+            document.title = 'نتایج رویدادها — WR3D Universe';
             window.scrollTo(0, 0);
           } else {
             document.title = 'WR3D Universe';
@@ -1795,6 +1995,33 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
         }
         window.addEventListener('hashchange', route);
         route();
+      })();
+
+      // Event picker on the results view: each event has its own page;
+      // picking an event opens that event's page and closes the other.
+      (function () {
+        var picks = Array.prototype.slice.call(document.querySelectorAll('.event-pick'));
+        if (!picks.length) return;
+        var hint = document.getElementById('pickHint');
+        var pages = {
+          'summerslam': document.getElementById('event-summerslam'),
+          'night-of-champions': document.getElementById('event-night-of-champions')
+        };
+        picks.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var key = btn.getAttribute('data-event');
+            picks.forEach(function (b) {
+              var on = b === btn;
+              b.classList.toggle('active', on);
+              b.setAttribute('aria-expanded', on ? 'true' : 'false');
+            });
+            Object.keys(pages).forEach(function (k) {
+              if (pages[k]) pages[k].hidden = k !== key;
+            });
+            if (hint) hint.hidden = true;
+            if (pages[key]) pages[key].scrollIntoView({ block: 'start' });
+          });
+        });
       })();
 
       // Star rating for SummerSlam (shared counters): the visitor picks a
