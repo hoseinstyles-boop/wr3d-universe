@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="data:," />
     <title>WR3D Universe</title>
-    <meta name="description" content="WR3D Universe — شوهای بوکینگ Wrestling Empire؛ نتایج شوها و قهرمانان فعلی" />
+    <meta name="description" content="WR3D Universe — شوهای بوکینگ Wrestling Empire؛ نتیجه‌ی شوها و قهرمانای الان" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Cinzel:wght@700;800;900&family=Oswald:wght@500;600;700&family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
@@ -433,6 +433,36 @@
       .stakes .s-holder { font-weight: 700; font-size: 15px; margin-top: 2px; }
       .next-event .cta-row { margin-top: 26px; }
 
+      /* ---------- legacy 2 countdown ---------- */
+      .count-card {
+        background:
+          repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, transparent 1px 34px),
+          repeating-linear-gradient(90deg, rgba(255,255,255,.028) 0 1px, transparent 1px 34px),
+          linear-gradient(150deg, #17171c 0%, #0d0d10 60%);
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--red);
+        border-radius: var(--radius);
+        padding: 30px 26px 26px; text-align: center;
+      }
+      .count-date { margin: 0 0 22px; color: var(--muted); font-size: 16px; }
+      .count-date b { color: var(--text); font-weight: 800; }
+      .count-date .en { color: var(--muted); font-weight: 600; }
+      .count-grid {
+        display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px; max-width: 560px; margin: 0 auto;
+      }
+      .count-cell {
+        background: var(--panel-2); border: 1px solid var(--line);
+        border-radius: 12px; padding: 16px 6px 12px;
+      }
+      .count-num {
+        font-family: "Archivo", "Vazirmatn", sans-serif; font-weight: 800;
+        font-size: clamp(30px, 7vw, 46px); line-height: 1.1; color: #fff;
+      }
+      .count-label { margin-top: 4px; font-size: 13.5px; font-weight: 700; color: #ff9aa4; }
+      .count-caption { margin: 22px 0 0; font-size: clamp(16px, 3vw, 19px); font-weight: 700; color: var(--text); }
+      .count-caption .en { font-weight: 800; letter-spacing: 0.02em; }
+
       /* ---------- champions ---------- */
       .champs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
       .champ {
@@ -689,10 +719,10 @@
         <a class="brand" href="#top" dir="ltr"><b>WR3D</b> <span>UNIVERSE</span></a>
         <nav class="nav">
           <a href="#news">اخبار</a>
-          <a href="#results">نتایج رویدادها</a>
+          <a href="#results">نتایج رویداد ها</a>
           <a href="#rate">نمره به رویداد</a>
           <a href="#next-event">رویداد بعدی</a>
-          <a href="#champions">قهرمانان</a>
+          <a href="#champions">قهرمانا</a>
           <a href="#textures">دانلود تکسچر</a>
           <a href="#asset-loader">آموزش Asset Loader</a>
           <a href="#about">درباره</a>
@@ -710,17 +740,17 @@
         <span class="hero-badge">WRESTLING EMPIRE BOOKING SHOWS</span>
         <h1>WR3D <span class="u">Universe</span></h1>
         <p class="tagline">The Best Wrestling Empire Booking Chanle on Rubika</p>
-        <p class="sub">دنیای بوکینگ کشتی‌کج با بازی Wrestling Empire؛ جایی که هر شو، هر مسابقه و هر کمربند، داستان خودش را دارد.</p>
+        <p class="sub">دنیای بوکینگ کشتی‌کج با بازی Wrestling Empire؛ جایی که هر شو، هر مسابقه و هر کمربند، داستان خودشو داره.</p>
         <div class="hero-cta">
           <a class="btn btn-red" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-            تماشای شوها در روبیکا
+            شوها رو تو روبیکا ببین
           </a>
           <a class="btn btn-gold" href="#asset-loader">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            آموزش کار با Asset Loader
+            یاد بگیر با Asset Loader کار کنی
           </a>
-          <a class="btn btn-ghost" href="#results">نتایج رویدادها</a>
+          <a class="btn btn-ghost" href="#results">نتایج رویداد ها</a>
         </div>
       </div>
     </div>
@@ -733,7 +763,7 @@
 
     <main class="wrap" id="view-home">
 
-      <p class="site-visits" id="siteVisits" hidden>بازدید سایت: <b id="siteVisitsNum"></b></p>
+      <p class="site-visits" id="siteVisits" hidden>بازدیدای سایت: <b id="siteVisitsNum"></b></p>
 
       <!-- ======= ASSET LOADER GUIDE BANNER ======= -->
       <a class="guide-banner" href="#asset-loader">
@@ -742,36 +772,48 @@
         </span>
         <div>
           <div class="kick">Asset Loader Guide</div>
-          <h2>آموزش کار با Asset Loader</h2>
-          <p>راهنمای فارسی و قدم‌به‌قدم اضافه کردن تکسچر، تایتان‌ترون و آهنگ ورودی به Wrestling Empire Legacy — از ساخت پوشه ماد تا عیب‌یابی.</p>
+          <h2>چطور با Asset Loader کار کنیم؟</h2>
+          <p>قدم‌به‌قدم به فارسی یاد می‌گیری چطور تکسچر، تایتان‌ترون و آهنگ ورودی رو به Wrestling Empire Legacy اضافه کنی — از ساختن پوشه‌ی ماد تا وقتی یه جای کار گیر کرد.</p>
         </div>
         <span class="guide-banner-btn">
-          مشاهده آموزش
+          آموزشو ببین
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
         </span>
       </a>
 
-      <!-- ======= NEWS ======= -->
-      <section id="news">
+      <!-- ======= LEGACY 2 COUNTDOWN ======= -->
+      <section id="legacy2-countdown">
         <div class="sec-head">
           <div>
-            <div class="kick">Universe News</div>
-            <h2>اخبار یونیورس</h2>
+            <div class="kick">Legacy 2 Countdown</div>
+            <h2>شمارش معکوس</h2>
           </div>
         </div>
 
-        <div class="news-grid">
-          <article class="news-card">
-            <div class="news-date">۳۰ آبان ۱۴۰۵</div>
-            <p>مسابقات راهیابی به المینیشن چمبر در اولین راو و اسمکداون بعد از سامراسلم شروع میشن.</p>
-          </article>
-
-          <article class="news-card">
-            <div class="news-date">۳۰ آبان ۱۴۰۵</div>
-            <p>وقفه ای که در سامراسلم افتاده با مسابقه فیند و رندی جبران میشه چون یکی از شاهکار ترین مسابقه های یونیورس خواهد بود. اخبار جدید بزودی..</p>
-          </article>
+        <div class="count-card">
+          <p class="count-date">کی میاد؟ <b>۲۴ آذر ۱۴۰۵</b> — ساعت <b>۳ ظهر</b> به وقت تهران <span class="en" dir="ltr">(15 December 2026)</span></p>
+          <div class="count-grid" role="timer" aria-label="چقدر مونده تا Wrestling Empire Legacy 2 بیاد">
+            <div class="count-cell"><div class="count-num" id="cdDays">۰۰</div><div class="count-label">روز</div></div>
+            <div class="count-cell"><div class="count-num" id="cdHours">۰۰</div><div class="count-label">ساعت</div></div>
+            <div class="count-cell"><div class="count-num" id="cdMinutes">۰۰</div><div class="count-label">دقیقه</div></div>
+            <div class="count-cell"><div class="count-num" id="cdSeconds">۰۰</div><div class="count-label">ثانیه</div></div>
+          </div>
+          <p class="count-caption" id="cdCaption">تا اومدن <span class="en" dir="ltr">Wrestling Empire Legacy 2</span></p>
         </div>
       </section>
+
+      <!-- ======= NEWS CTA (opens the separate news page via #news) ======= -->
+      <a class="tex-cta" href="#news">
+        <div>
+          <div class="kick">Universe News</div>
+          <h2>اخبار یونیورس</h2>
+          <p>آخرین خبرا و اطلاعیه‌های یونیورس تو یه صفحه‌ی جدا — از شروع مسابقه‌های راهیابی چمبر تا مسابقه‌ی فیند و رندی.</p>
+        </div>
+        <span class="tex-cta-btn">
+          خبرا رو ببین
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        </span>
+      </a>
 
       <!-- ======= RATE THE EVENT ======= -->
       <section id="rate">
@@ -780,7 +822,7 @@
             <div class="kick">Rate The Event</div>
             <h2>به سامراسلم نمره بده</h2>
           </div>
-          <p class="side">سامراسلم دوشبه چطور بود؟ از یک تا پنج ستاره انتخاب کن و با دکمه «ثبت نمره» رأیت را نهایی کن — میانگین و تعداد نمره‌ها همین‌جا نمایش داده می‌شود.</p>
+          <p class="side">سامراسلم دو شبه چطور بود؟ از یه ستاره تا پنج ستاره انتخاب کن و دکمه‌ی «ثبت نمره» رو بزن تا رأیت ثبت بشه — میانگین و تعداد نمره‌ها هم همین‌جا نشون داده می‌شه.</p>
         </div>
 
         <div class="rate-card reveal">
@@ -804,14 +846,14 @@
                     <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                   </div>
                 </div>
-                <div class="rate-avg-note" id="rateAvgNote">هنوز نمره‌ای ثبت نشده — اولین نفر باش!</div>
+                <div class="rate-avg-note" id="rateAvgNote">هنوز کسی نمره نداده — تو اولین نفر باش!</div>
               </div>
             </div>
 
             <div class="rate-vote">
-              <div class="rate-vote-title">نمره تو به سامراسلم:</div>
-              <div class="stars-input" id="starsInput" dir="ltr" role="radiogroup" aria-label="نمره از یک تا پنج ستاره">
-                <button type="button" class="star-btn" data-value="1" role="radio" aria-checked="false" aria-label="یک ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
+              <div class="rate-vote-title">نمره‌ی تو به سامراسلم:</div>
+              <div class="stars-input" id="starsInput" dir="ltr" role="radiogroup" aria-label="نمره از یه ستاره تا پنج ستاره">
+                <button type="button" class="star-btn" data-value="1" role="radio" aria-checked="false" aria-label="یه ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
                 <button type="button" class="star-btn" data-value="2" role="radio" aria-checked="false" aria-label="دو ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
                 <button type="button" class="star-btn" data-value="3" role="radio" aria-checked="false" aria-label="سه ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
                 <button type="button" class="star-btn" data-value="4" role="radio" aria-checked="false" aria-label="چهار ستاره"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></button>
@@ -820,11 +862,11 @@
               <div class="rate-actions">
                 <button type="button" class="btn-submit" id="rateSubmit" disabled>ثبت نمره</button>
               </div>
-              <div class="rate-msg" id="rateMsg" aria-live="polite">اول ستاره‌ها را انتخاب کن، بعد دکمه «ثبت نمره» را بزن تا رأیت ثبت شود.</div>
+              <div class="rate-msg" id="rateMsg" aria-live="polite">اول ستاره‌ها رو انتخاب کن، بعد دکمه‌ی «ثبت نمره» رو بزن تا رأیت ثبت بشه.</div>
             </div>
           </div>
 
-          <div class="rate-dist" id="rateDist" aria-label="توزیع نمره‌های ثبت‌شده"></div>
+          <div class="rate-dist" id="rateDist" aria-label="نمره‌هایی که ثبت شدن چطور پخش شدن"></div>
         </div>
       </section>
 
@@ -834,7 +876,7 @@
           <div class="kick">Next Event</div>
           <h2 class="fa-title">رویداد بعدی</h2>
           <div class="big">Elimination <span class="u">Chamber</span></div>
-          <p class="lead">نبردها و داستان‌های جدید بعد از سامراسلم به سمت یونیورس میان — چه کسی از قفس برنده بیرون میاد؟ <b>راو</b> و <b>اسمکداون</b> یونیورس رو به هیچ وجه از دست ندید!</p>
+          <p class="lead">دعواها و داستانای جدید بعد از سامراسلم دارن میان سمت یونیورس — کی از تو قفس برنده میاد بیرون؟ <b>راو</b> و <b>اسمکداون</b> یونیورس رو اصلاً از دست ندین!</p>
 
           <ul class="stakes">
             <li>
@@ -862,7 +904,7 @@
           <div class="cta-row">
             <a class="btn btn-red" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-              دنبال کردن مسیر چمبر در روبیکا
+              مسیر چمبر رو تو روبیکا دنبال کن
             </a>
           </div>
         </div>
@@ -873,9 +915,9 @@
         <div class="sec-head reveal">
           <div>
             <div class="kick">Current Champions</div>
-            <h2>قهرمانان فعلی</h2>
+            <h2>قهرمانای فعلی</h2>
           </div>
-          <p class="side">کمربندهای WR3D Universe بعد از سامراسلم؛ فقط یک کمربند در این شو دست‌به‌دست شد.</p>
+          <p class="side">کمربندای WR3D Universe بعد از سامراسلم؛ تو این شو فقط یه کمربند دست‌به‌دست شد.</p>
         </div>
 
         <div class="champs">
@@ -893,7 +935,7 @@
             <div class="title-name">Supertitle</div>
             <h3>Randy Orton</h3>
             <div class="fa-name">رندی اورتن</div>
-            <div class="defense">دفاع مقابل <b>“The Fiend” Bray Wyatt</b> در سامراسلم، شب دوم — نتیجه هنوز مشخص نشده</div>
+            <div class="defense">دفاعش جلوی <b>“The Fiend” Bray Wyatt</b> تو سامراسلم، شب دوم — هنوز معلوم نیست کی برده</div>
           </article>
 
           <article class="champ reveal">
@@ -910,7 +952,7 @@
             <div class="title-name">Undisputed Championship</div>
             <h3>Brock Lesnar</h3>
             <div class="fa-name">براک لزنر</div>
-            <div class="defense">آخرین دفاع: در برابر <b>Bron Breakker</b> — سامراسلم، شب دوم</div>
+            <div class="defense">آخرین دفاعش: جلوی <b>Bron Breakker</b> — سامراسلم، شب دوم</div>
           </article>
 
           <article class="champ reveal">
@@ -927,7 +969,7 @@
             <div class="title-name">World Heavyweight Championship</div>
             <h3>Finn Bálor</h3>
             <div class="fa-name">فین بلر</div>
-            <div class="defense">آخرین دفاع: در برابر <b>Cody Rhodes</b> — سامراسلم، شب اول</div>
+            <div class="defense">آخرین دفاعش: جلوی <b>Cody Rhodes</b> — سامراسلم، شب اول</div>
           </article>
 
           <article class="champ wide reveal">
@@ -944,7 +986,7 @@
             <div class="title-name">Intercontinental Championship</div>
             <h3>Drew McIntyre</h3>
             <div class="fa-name">درو مک‌اینتایر</div>
-            <div class="defense">آخرین دفاع: در برابر <b>Adam Cole</b> — سامراسلم، شب اول</div>
+            <div class="defense">آخرین دفاعش: جلوی <b>Adam Cole</b> — سامراسلم، شب اول</div>
           </article>
 
           <article class="champ wide reveal">
@@ -961,7 +1003,7 @@
             <div class="title-name">Universe Tag Team Championship</div>
             <h3>Braun Strowman &amp; Erik Rowan</h3>
             <div class="fa-name">بران استرومن و اریک روون</div>
-            <div class="defense">قهرمانان جدید: کمربند را از <b>Jacob Fatu &amp; Jimmy Uso</b> گرفتند — سامراسلم، شب دوم</div>
+            <div class="defense">قهرمانای جدیدن: کمربندو از <b>Jacob Fatu &amp; Jimmy Uso</b> گرفتن — سامراسلم، شب دوم</div>
           </article>
         </div>
       </section>
@@ -971,10 +1013,10 @@
         <div>
           <div class="kick">Texture Downloads</div>
           <h2>دانلود تکسچر</h2>
-          <p>هر پنج تکسچر دیمن فین بالور برای Wrestling Empire، با کیفیت اصلی در صفحه‌ی دانلود تکسچر.</p>
+          <p>پک‌های تکسچر رو برای آپدیت کردن بازیت از اینجا دانلود کن.</p>
         </div>
         <span class="tex-cta-btn">
-          مشاهده و دانلود
+          ببین و دانلود کن
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
         </span>
       </a>
@@ -990,25 +1032,59 @@
 
         <div class="about-grid">
           <div class="about-card reveal">
-            <h3>اینجا چه خبر است؟</h3>
-            <p><b>WR3D Universe</b> یک دنیای بوکینگ کشتی‌کج است که با بازی <b>Wrestling Empire</b> ساخته و اجرا می‌شود؛ شوها با سبک و سلیقه اختصاصی بوک می‌شوند — از کارت مسابقه و فیودها تا سرنوشت تک‌تک کمربندها.</p>
-            <p>سامراسلم دوشبه تازه‌ترین رویداد بزرگ این دنیا بود: هفت مسابقه، شش مسابقه کمربندی و فقط یک تغییر قهرمان. حالا نوبت فصل تازه راو و اسمکداون و فیودهای جدید است.</p>
+            <h3>اینجا چه خبره؟</h3>
+            <p><b>WR3D Universe</b> یه دنیای بوکینگ کشتی‌کجه که با بازی <b>Wrestling Empire</b> ساخته و اجرا می‌شه؛ شوها با سبک و سلیقه‌ی خودمون بوک می‌شن — از کارت مسابقه و فیودا تا سرنوشت تک‌تک کمربندا.</p>
+            <p>سامراسلم دو شبه آخرین رویداد بزرگ این دنیا بود: هفت تا مسابقه، شش تاش سر کمربند بود و فقط یه قهرمان عوض شد. حالا نوبت فصل تازه‌ی راو و اسمکداون و فیودای جدیده.</p>
             <div class="facts">
-              <div class="fact"><div class="v">2</div><div class="k">شب سامراسلم</div></div>
-              <div class="fact"><div class="v">7</div><div class="k">مسابقه</div></div>
-              <div class="fact"><div class="v">5</div><div class="k">کمربند فعال</div></div>
+              <div class="fact"><div class="v">2</div><div class="k">شبه‌ی سامراسلم</div></div>
+              <div class="fact"><div class="v">7</div><div class="k">تا مسابقه</div></div>
+              <div class="fact"><div class="v">5</div><div class="k">تا کمربند فعال</div></div>
             </div>
           </div>
 
           <div class="channel-card reveal">
-            <div class="plat">کانال رسمی در روبیکا</div>
+            <div class="plat">کانال رسمی تو روبیکا</div>
             <div class="handle">@wr3duniverse</div>
-            <p>همه شوها، نتایج و پوسترهای WR3D Universe اول در کانال روبیکا منتشر می‌شود. عضو شو تا هیچ شویی را از دست ندهی.</p>
+            <p>همه‌ی شوها، نتیجه‌ها و پوسترای WR3D Universe اول تو کانال روبیکا میاد. عضو شو تا هیچ شویی رو از دست ندی.</p>
             <a class="btn btn-red" href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-              عضویت در کانال روبیکا
+              عضو کانال روبیکا شو
             </a>
           </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======= NEWS PAGE (separate view, opened via #news) ======= -->
+    <main class="wrap" id="view-news" hidden>
+      <section class="tex-page" id="newsPage">
+        <div class="page-head">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگرد صفحه‌ی اصلی
+          </a>
+          <div class="kick">Universe News</div>
+          <h1>اخبار یونیورس</h1>
+          <p>آخرین خبرا و اطلاعیه‌های دنیای WR3D Universe.</p>
+        </div>
+
+        <div class="news-grid">
+          <article class="news-card">
+            <div class="news-date">۳۰ آبان ۱۴۰۵</div>
+            <p>مسابقه‌های راهیابی به الیمینیشن چمبر تو اولین راو و اسمکداون بعد از سامراسلم شروع می‌شن.</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-date">۳۰ آبان ۱۴۰۵</div>
+            <p>اون وقفه‌ای که تو سامراسلم افتاد، با مسابقه‌ی فیند و رندی جبران می‌شه، چون قراره یکی از شاهکارترین مسابقه‌های یونیورس بشه. خبرای جدید به‌زودی میاد..</p>
+          </article>
+        </div>
+
+        <div class="back-row">
+          <a class="back-link" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            برگرد صفحه‌ی اصلی
+          </a>
         </div>
       </section>
     </main>
@@ -1019,11 +1095,11 @@
         <div class="page-head">
           <a class="back-link" href="#top">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            برگشت به صفحه اصلی
+            برگرد صفحه‌ی اصلی
           </a>
           <div class="kick">Event Results</div>
-          <h1>نتایج رویدادها</h1>
-          <p>روی رویداد مورد نظر کلیک کن و نتایجش رو ببین!</p>
+          <h1>نتایج رویداد ها</h1>
+          <p>رو رویدادی که می‌خوای کلیک کن و نتیجه‌هاشو ببین!</p>
         </div>
 
         <div class="event-picker" dir="ltr">
@@ -1042,7 +1118,7 @@
             </span>
           </button>
         </div>
-        <p class="pick-hint" id="pickHint">برای دیدن نتایج، یکی از رویدادهای بالا را انتخاب کن.</p>
+        <p class="pick-hint" id="pickHint">برای دیدن نتیجه‌ها، یکی از رویدادای بالا رو انتخاب کن.</p>
 
         <div class="event-page" id="event-summerslam" hidden>
           <h2 class="event-logo-title center"><img class="event-logo event-logo-ss" src="assets/logo-summerslam.png" alt="SummerSlam" /></h2>
@@ -1062,7 +1138,7 @@
               <a href="assets/spoiler-femi-sikoa.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-femi-sikoa.jpg" alt="Oba Femi standing tall in the SummerSlam ring after defeating Solo Sikoa, who is down on the mat" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
@@ -1071,19 +1147,19 @@
             <div class="result-note">مک‌اینتایر کمربند رو حفظ کرد</div>
             <div class="tags">
               <span class="tag title">کمربند اینترکانتینتال</span>
-              <span class="tag">حفظ کمربند</span>
+              <span class="tag">کمربندو نگه داشت</span>
             </div>
             <figure class="spoiler-shot">
               <a href="assets/spoiler-mcintyre-cole.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-mcintyre-cole.jpg" alt="Drew McIntyre holding the Intercontinental Championship in the SummerSlam ring after defeating Adam Cole" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
           <div class="match">
             <div class="vs"><span class="w">سی‌ام پانک</span> <span class="def">مقابل</span> <span class="l">گانتر</span></div>
-            <div class="result-note">برنده: <b>سی‌ام پانک</b> — رندی اورتن دخالت کرد</div>
+            <div class="result-note">برنده: <b>سی‌ام پانک</b> — رندی اورتن اومد وسط و دخالت کرد</div>
             <div class="tags">
               <span class="tag stip">هاردکور مچ</span>
               <span class="tag">دخالت رندی اورتن</span>
@@ -1092,7 +1168,7 @@
               <a href="assets/spoiler-punk-gunther.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-punk-gunther.jpg" alt="CM Punk standing in the SummerSlam ring next to a downed Gunther after winning their Hardcore Match" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
@@ -1102,13 +1178,13 @@
             <div class="tags">
               <span class="tag title">کمربند سنگین وزن</span>
               <span class="tag">مسابقه اصلی شب اول</span>
-              <span class="tag">حفظ کمربند</span>
+              <span class="tag">کمربندو نگه داشت</span>
             </div>
             <figure class="spoiler-shot">
               <a href="assets/spoiler-balor-rhodes.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-balor-rhodes.jpg" alt="Finn Bálor holding the World Heavyweight Championship in the SummerSlam ring after defeating Cody Rhodes" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
         </article>
@@ -1121,16 +1197,16 @@
 
           <div class="match">
             <div class="vs"><span class="w">براون استرومن و اریک روون</span> <span class="def">مقابل</span> <span class="l">جیکوب فاتو و جیمی اوسو</span></div>
-            <div class="result-note">برنده: <b>استرومن و روون</b> — قهرمان‌های جدید</div>
+            <div class="result-note">برنده: <b>استرومن و روون</b> — قهرمانای جدید شدن</div>
             <div class="tags">
               <span class="tag title">کمربند تگ تیم یونیورس</span>
-              <span class="tag new">قهرمان‌های جدید</span>
+              <span class="tag new">قهرمانای جدید</span>
             </div>
             <figure class="spoiler-shot">
               <a href="assets/spoiler-strowman-rowan.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-strowman-rowan.jpg" alt="Braun Strowman and Erik Rowan holding the Universe Tag Team Championships in the SummerSlam ring after defeating Jacob Fatu and Jimmy Uso" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
@@ -1139,19 +1215,19 @@
             <div class="result-note">لزنر کمربند رو حفظ کرد</div>
             <div class="tags">
               <span class="tag title">کمربند اندسپیوتد</span>
-              <span class="tag">حفظ کمربند</span>
+              <span class="tag">کمربندو نگه داشت</span>
             </div>
             <figure class="spoiler-shot">
               <a href="assets/spoiler-lesnar-breakker.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-lesnar-breakker.jpg" alt="Brock Lesnar holding the Undisputed Championship in the SummerSlam ring after defeating Bron Breakker" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
           <div class="match">
             <div class="vs"><span class="l">رندی اورتن</span> <span class="def">مقابل</span> <span class="l">«د فیند» بری وایت</span></div>
-            <div class="result-note tbd-note">نتیجه هنوز مشخص نشده</div>
+            <div class="result-note tbd-note">هنوز معلوم نیست کی برده</div>
             <div class="tags">
               <span class="tag title">کمربند سوپرتایتل</span>
               <span class="tag stip">فالز کانت انی‌ور</span>
@@ -1166,8 +1242,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
         </div>
         <div>
-          <h3>بعد از سامراسلم چه خبر است؟</h3>
-          <p>قراره جنگ برای الیمینیشن چمبر شروع بشه — منتظر راو و اسمکداون باشید.</p>
+          <h3>بعد از سامراسلم چه خبره؟</h3>
+          <p>قراره جنگ برای الیمینیشن چمبر شروع بشه — منتظر راو و اسمکداون باشین.</p>
         </div>
       </div>
         </div>
@@ -1178,7 +1254,7 @@
         <article class="night reveal">
           <div class="night-head">
             <span class="n">کارت کامل</span>
-            <h3>کارت مسابقات و نتایج</h3>
+            <h3>کارت مسابقه‌ها و نتیجه‌هاشون</h3>
           </div>
 
           <div class="match">
@@ -1191,7 +1267,7 @@
               <a href="assets/spoiler-jey-uso-rollins.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-jey-uso-rollins.jpg" alt="جی اوسو با کمربند یونایتد استیتس در رینگ نایت آف چمپیونز بعد از شکست ست رولینز" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
@@ -1214,7 +1290,7 @@
               <a href="assets/spoiler-mcintyre-zayn.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-mcintyre-zayn.jpg" alt="درو مک‌اینتایر با کمربند اینترکانتینتال در رینگ نایت آف چمپیونز و سمی زین روی زمین" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
@@ -1228,7 +1304,7 @@
               <a href="assets/spoiler-balor-lashley.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-balor-lashley.jpg" alt="فین بالور با کمربند سنگین وزن در رینگ نایت آف چمپیونز و بابی لشلی روی زمین" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
@@ -1243,7 +1319,7 @@
               <a href="assets/spoiler-lesnar-styles.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-lesnar-styles.jpg" alt="براک لزنر با کمربند اندسپیوتد در رینگ نایت آف چمپیونز و ای‌جی استایلز روی میز شکسته" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
 
@@ -1258,7 +1334,7 @@
               <a href="assets/spoiler-orton-reigns.jpg" target="_blank" rel="noopener">
                 <img src="assets/spoiler-orton-reigns.jpg" alt="رندی اورتن با کمربند سوپرتایتل در رینگ نایت آف چمپیونز و رومن رینز روی زمین" loading="lazy" />
               </a>
-              <figcaption>اسپویلر تصویری — پایان مسابقه</figcaption>
+              <figcaption>عکس اسپویلر — آخر مسابقه</figcaption>
             </figure>
           </div>
         </article>
@@ -1267,7 +1343,7 @@
         <div class="back-row">
           <a class="back-link" href="#top">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            برگشت به صفحه اصلی
+            برگرد صفحه‌ی اصلی
           </a>
         </div>
       </section>
@@ -1279,11 +1355,11 @@
         <div class="page-head">
           <a class="back-link" href="#top">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            برگشت به صفحه اصلی
+            برگرد صفحه‌ی اصلی
           </a>
           <div class="kick">Texture Downloads</div>
           <h1>دانلود تکسچر</h1>
-          <p>تکسچر هارو از این بخش دانلود کنید. تکسچرهای دیمن فین بالور برای Wrestling Empire، هرکدام با کیفیت اصلی؛ روی دکمه دانلود بزن و فایل رو بگیر.</p>
+          <p>تکسچرا رو از همین بخش دانلود کنین. تکسچرای دیمن فین بالور برای Wrestling Empire، هرکدوم با کیفیت اصلی؛ رو دکمه‌ی دانلود بزن و فایل رو بگیر.</p>
         </div>
 
         <div class="tex-grid">
@@ -1705,7 +1781,7 @@
         <div class="back-row">
           <a class="back-link" href="#top">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            برگشت به صفحه اصلی
+            برگرد صفحه‌ی اصلی
           </a>
         </div>
       </section>
@@ -1717,41 +1793,41 @@
         <div class="page-head">
           <a class="back-link" href="#top">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            برگشت به صفحه اصلی
+            برگرد صفحه‌ی اصلی
           </a>
           <div class="kick">Asset Loader Guide</div>
-          <h1>آموزش کار با Asset Loader</h1>
-          <p>راهنمای مادینگ Asset Loader در Wrestling Empire Legacy — چطور بدون بازسازی بازی، لباس، تایتان‌ترون، آهنگ ورودی و تکسچر جایگزین اضافه کنیم. تهیه‌شده توسط CXGStudios</p>
+          <h1>چطور با Asset Loader کار کنیم؟</h1>
+          <p>راهنمای مادینگ با Asset Loader تو Wrestling Empire Legacy — چطور بدون اینکه بازی رو از اول بسازی، لباس، تایتان‌ترون، آهنگ ورودی و تکسچر جایگزین اضافه کنی. این آموزشو CXGStudios درست کرده</p>
         </div>
 
         <div class="guide-sec">
           <h3>شروع سریع</h3>
-          <p>Asset Loader به بازیکن اجازه می‌ده فایل‌ها رو توی یه پوشه معمولی بیرون از بازی بذاره. وقتی بازی شروع می‌شه یا دکمه Asset Loader زده می‌شه، بازی اون پوشه رو بررسی می‌کنه و آیتم‌های پشتیبانی‌شده رو به‌صورت خودکار اضافه یا جایگزین می‌کنه.</p>
-          <h4>اولین قدم</h4>
+          <p>Asset Loader بهت اجازه می‌ده فایل‌ها رو توی یه پوشه‌ی معمولی بیرون از بازی بذاری. وقتی بازی شروع می‌شه یا دکمه Asset Loader رو می‌زنی، بازی اون پوشه رو چک می‌کنه و آیتم‌هایی که پشتیبانی می‌شن رو خودکار اضافه یا عوض می‌کنه.</p>
+          <h4>قدم اول</h4>
           <ul>
-            <li>بازی رو یک بار اجرا کن.</li>
-            <li>از طریق دکمه Asset Loader منوی «CXGStudios» رو باز کن.</li>
+            <li>بازی رو یه بار اجرا کن.</li>
+            <li>با دکمه‌ی Asset Loader منوی «CXGStudios» رو باز کن.</li>
             <li>روی Asset Loader کلیک کن. بازی پوشه‌های ماد رو می‌سازه و خودش برات بازشون می‌کنه.</li>
             <li>قبل از اضافه کردن تعداد زیادی فایل، بازی رو ببند و بعد از کپی کردن فایل‌ها دوباره اجراش کن.</li>
           </ul>
         </div>
 
         <div class="guide-sec">
-          <h3>پوشه ماد در PC</h3>
+          <h3>پوشه‌ی ماد تو PC</h3>
           <div class="codeblock">C:\Users\ADMIN\AppData\LocalLow\CXGStudios\Wrestling Empire Legacy\WrestlingEmpireMods</div>
-          <p>(به‌جای <span class="gcode">ADMIN</span> نام کاربری ویندوز خودت رو بذار)</p>
+          <p>(به‌جای <span class="gcode">ADMIN</span> اسم کاربری ویندوز خودتو بذار)</p>
         </div>
 
         <div class="guide-sec">
-          <h3>پوشه ماد در اندروید</h3>
-          <p>در اندروید، از پوشه‌ای استفاده کن که از طریق انتخاب‌گر پوشه داخل بازی (Asset Loader) انتخاب کردی. بازی همون ساختار پوشه‌ها رو داخل محل انتخاب‌شده می‌سازه.</p>
-          <div class="guide-note"><b>مهم:</b> کاربران اندروید اگه از انتخاب‌گر پوشه داخل بازی استفاده کنن، به <span dir="ltr">Shizuku</span> یا دسترسی مستقیم به پوشه محافظت‌شده دیتای بازی نیازی ندارن.</div>
+          <h3>پوشه‌ی ماد تو اندروید</h3>
+          <p>تو اندروید، از همون پوشه‌ای استفاده کن که با انتخاب‌گر پوشه‌ی توی بازی (Asset Loader) انتخابش کردی. بازی همون ساختار پوشه‌ها رو تو همون جایی که انتخاب کردی می‌سازه.</p>
+          <div class="guide-note"><b>مهم:</b> اگه اندرویدی و از انتخاب‌گر پوشه‌ی توی بازی استفاده کنی، دیگه به <span dir="ltr">Shizuku</span> یا دسترسی مستقیم به پوشه‌ی محافظت‌شده‌ی دیتای بازی نیاز نداری.</div>
         </div>
 
         <div class="guide-sec">
           <h3>دو نوع فایل ماد</h3>
           <ul>
-            <li><b>اسلات‌های قابل‌اضافه:</b> شماره‌های جدید قابل‌انتخاب بعد از حد اصلی بازی اضافه می‌کنن. مثال: <span class="gcode">face323.png</span> ،<span class="gcode">Theme124.mp3</span> ،<span class="gcode">26.mp4</span></li>
+            <li><b>اسلات‌هایی که می‌شه اضافه کرد:</b> شماره‌های جدیدی رو اضافه می‌کنن که بعد از حد اصلی بازی می‌تونی انتخابشون کنی. مثال: <span class="gcode">face323.png</span> ،<span class="gcode">Theme124.mp3</span> ،<span class="gcode">26.mp4</span></li>
             <li><b>فایل‌های جایگزین:</b> یه تکسچر موجود رو با همون اسم جایگزین می‌کنن. اسلات جدید اضافه نمی‌کنن. مثال: <span class="gcode">Fed01.png</span> ،<span class="gcode">Fed01_Texture01.png</span> ،<span class="gcode">canvas_logo04.png</span></li>
           </ul>
         </div>
@@ -1766,38 +1842,38 @@
         </div>
 
         <div class="guide-sec">
-          <h3>قوانین کلی فایل‌ها</h3>
+          <h3>قانونای کلی فایل‌ها</h3>
           <ul>
             <li>اسم‌ها باید دقیقاً مثل مثال‌ها باشن، مخصوصاً حروف بزرگ و کوچک و شماره‌ها.</li>
             <li>فایل‌های عکس می‌تونن <span class="gcode">PNG</span> یا <span class="gcode">JPG</span> یا <span class="gcode">JPEG</span> باشن.</li>
             <li>فایل‌های آهنگ باید <span class="gcode">MP3</span> باشن.</li>
             <li>فایل‌های تایتان‌ترون باید <span class="gcode">MP4</span> باشن.</li>
-            <li>قالب شماره‌گذاری هر نوع آیتم رو رعایت کن، مگر اینکه پایین‌تر خلافش گفته شده باشه.</li>
+            <li>قالب شماره‌گذاری هر نوع آیتم رو رعایت کن، مگر اینکه پایین‌تر برعکسش گفته شده باشه.</li>
             <li>اگه چیزی ظاهر نشد، بعد از اضافه کردن فایل‌ها بازی رو ری‌استارت کن.</li>
           </ul>
         </div>
 
         <div class="guide-sec">
-          <h3>اسلات‌های لباس</h3>
-          <p>تکسچرهای لباس قابل‌اضافه‌ان. اگه آخرین صورت اصلی 322 باشه، اضافه کردن <span class="gcode">face323.png</span> اسلات 323 رو در دسترس قرار می‌ده. تعداد اسلات‌ها بر اساس بالاترین فایل با اسم صحیح مشخص می‌شه.</p>
+          <h3>اسلاتای لباس</h3>
+          <p>تکسچرای لباس رو می‌شه اضافه کرد. اگه آخرین صورت اصلی 322 باشه، وقتی <span class="gcode">face323.png</span> رو اضافه کنی، اسلات 323 برات باز می‌شه. تعداد اسلات‌ها هم از روی بالاترین فایلی که اسمش درسته مشخص می‌شه.</p>
           <table class="gtable">
             <thead>
               <tr><th>پوشه</th><th>مثال اسم فایل</th><th>کاربرد</th></tr>
             </thead>
             <tbody>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="مثال اسم فایل">face323.png, face_female35.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر صورت</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Bodies</td><td class="ltr-cell" data-label="مثال اسم فایل">body312.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر بدن</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Legs</td><td class="ltr-cell" data-label="مثال اسم فایل">legs313.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر پا</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Arms</td><td class="ltr-cell" data-label="مثال اسم فایل">arm262.png</td><td data-label="کاربرد">اضافه کردن اسلات تکسچر بازو</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Hands</td><td class="ltr-cell" data-label="مثال اسم فایل">glove27.png</td><td data-label="کاربرد">اضافه کردن اسلات دستکش/دست</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Masks</td><td class="ltr-cell" data-label="مثال اسم فایل">Mask45.png</td><td data-label="کاربرد">اضافه کردن اسلات ماسک</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Footwear</td><td class="ltr-cell" data-label="مثال اسم فایل">shoes30.png, laces18.png</td><td data-label="کاربرد">اضافه کردن اسلات کفش/بند کفش</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Necks</td><td class="ltr-cell" data-label="مثال اسم فایل">collar17.png</td><td data-label="کاربرد">اضافه کردن اسلات یقه/گردن</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Hair</td><td class="ltr-cell" data-label="مثال اسم فایل">hair13.png, hair_alpha06.png, shave19.png</td><td data-label="کاربرد">اضافه کردن اسلات مو و اصلاح</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Beards</td><td class="ltr-cell" data-label="مثال اسم فایل">beard22.png</td><td data-label="کاربرد">اضافه کردن اسلات ریش</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Body Patterns</td><td class="ltr-cell" data-label="مثال اسم فایل">body_pattern117.png</td><td data-label="کاربرد">اضافه کردن اسلات طرح بدن</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Leg Patterns</td><td class="ltr-cell" data-label="مثال اسم فایل">legs_pattern58.png, kneepads16.png</td><td data-label="کاربرد">اضافه کردن اسلات طرح پا/زانوبند</td></tr>
-              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Accessories</td><td class="ltr-cell" data-label="مثال اسم فایل">pad31.png, wristband23.png</td><td data-label="کاربرد">اضافه کردن اسلات پد و مچ‌بند</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="مثال اسم فایل">face323.png, face_female35.png</td><td data-label="کاربرد">یه اسلات تکسچر صورت اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Bodies</td><td class="ltr-cell" data-label="مثال اسم فایل">body312.png</td><td data-label="کاربرد">یه اسلات تکسچر بدن اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Legs</td><td class="ltr-cell" data-label="مثال اسم فایل">legs313.png</td><td data-label="کاربرد">یه اسلات تکسچر پا اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Arms</td><td class="ltr-cell" data-label="مثال اسم فایل">arm262.png</td><td data-label="کاربرد">یه اسلات تکسچر بازو اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Hands</td><td class="ltr-cell" data-label="مثال اسم فایل">glove27.png</td><td data-label="کاربرد">یه اسلات دستکش/دست اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Masks</td><td class="ltr-cell" data-label="مثال اسم فایل">Mask45.png</td><td data-label="کاربرد">یه اسلات ماسک اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Footwear</td><td class="ltr-cell" data-label="مثال اسم فایل">shoes30.png, laces18.png</td><td data-label="کاربرد">یه اسلات کفش/بند کفش اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Necks</td><td class="ltr-cell" data-label="مثال اسم فایل">collar17.png</td><td data-label="کاربرد">یه اسلات یقه/گردن اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Hair</td><td class="ltr-cell" data-label="مثال اسم فایل">hair13.png, hair_alpha06.png, shave19.png</td><td data-label="کاربرد">یه اسلات مو و اصلاح اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Beards</td><td class="ltr-cell" data-label="مثال اسم فایل">beard22.png</td><td data-label="کاربرد">یه اسلات ریش اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Body Patterns</td><td class="ltr-cell" data-label="مثال اسم فایل">body_pattern117.png</td><td data-label="کاربرد">یه اسلات طرح بدن اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Leg Patterns</td><td class="ltr-cell" data-label="مثال اسم فایل">legs_pattern58.png, kneepads16.png</td><td data-label="کاربرد">یه اسلات طرح پا/زانوبند اضافه می‌کنه</td></tr>
+              <tr><td class="ltr-cell" data-label="پوشه">Costumes/Accessories</td><td class="ltr-cell" data-label="مثال اسم فایل">pad31.png, wristband23.png</td><td data-label="کاربرد">یه اسلات پد و مچ‌بند اضافه می‌کنه</td></tr>
             </tbody>
           </table>
           <p style="margin-top:14px">مثال:</p>
@@ -1806,9 +1882,9 @@
 
         <div class="guide-sec">
           <h3>تایتان‌ترون و آهنگ‌ها</h3>
-          <p>تایتان‌ترون و آهنگ‌های ورودی قابل‌اضافه‌ان. بازی اسلات‌ها رو بر اساس بالاترین شماره فایل داخل پوشه اضافه می‌کنه.</p>
+          <p>تایتان‌ترون و آهنگای ورودی رو هم می‌شه اضافه کرد. بازی اسلات‌ها رو از روی بالاترین شماره فایلی که تو پوشه‌ست اضافه می‌کنه.</p>
           <ul>
-            <li><b>تایتان‌ترون</b> — پوشه <span class="gcode">Titantrons</span> — اسم <span class="gcode">26.mp4</span> — فقط <span class="gcode">MP4</span>. برای بهترین سازگاری از <span class="gcode">H.264/AAC</span> استفاده کن.</li>
+            <li><b>تایتان‌ترون</b> — پوشه <span class="gcode">Titantrons</span> — اسم <span class="gcode">26.mp4</span> — فقط <span class="gcode">MP4</span>. برای اینکه بهتر جواب بده از <span class="gcode">H.264/AAC</span> استفاده کن.</li>
             <li><b>آهنگ ورودی</b> — پوشه <span class="gcode">Themes</span> — اسم <span class="gcode">Theme124.mp3</span> یا <span class="gcode">Theme 124.mp3</span> یا <span class="gcode">124.mp3</span> — فقط <span class="gcode">MP3</span>. اگه با فرمت <span class="gcode">MP4</span> ذخیره شده باشه، پخش نمی‌شه.</li>
           </ul>
           <p style="margin-top:12px">مثال‌ها:</p>
@@ -1817,20 +1893,20 @@ WrestlingEmpireMods\Themes\Theme124.mp3</div>
         </div>
 
         <div class="guide-sec">
-          <h3>تنظیمات پیشنهادی فایل‌های رسانه‌ای</h3>
+          <h3>تنظیمات پیشنهادی برای فایلای ویدیو و آهنگ</h3>
           <ul>
             <li><b>تایتان‌ترون:</b> <span class="gcode">MP4</span>، ویدیو <span class="gcode">H.264</span>، صدای <span class="gcode">AAC</span>، کیفیت <span class="gcode">720p</span> یا <span class="gcode">1080p</span>.</li>
             <li><b>آهنگ:</b> <span class="gcode">MP3</span>، بیت‌ریت 128 تا 320 <span class="gcode">kbps</span>، استریو.</li>
-            <li>فایل‌ها رو به‌اندازه فشرده نگه دار. فایل‌های رسانه‌ای خیلی بزرگ می‌تونن لود بازی رو کند کنن یا فضای دیسک رو هدر بدن.</li>
+            <li>فایل‌ها رو تا جایی که می‌شه فشرده نگه دار. فایلای ویدیو و آهنگ خیلی بزرگ می‌تونن لود بازی رو کند کنن یا الکی فضای دیسک رو پر کنن.</li>
           </ul>
         </div>
 
         <div class="guide-sec">
-          <h3>تکسچرهای جایگزین</h3>
-          <p>این فایل‌ها تکسچرهای موجود داخل بازی رو جایگزین می‌کنن. اسلات جدید قابل‌انتخاب اضافه نمی‌کنن. از اسم دقیق آیتم اصلی استفاده کن.</p>
+          <h3>تکسچرای جایگزین</h3>
+          <p>این فایل‌ها تکسچرایی که از قبل تو بازی هستن رو عوض می‌کنن. اسلات جدیدی اضافه نمی‌کنن که بتونی انتخابش کنی. از اسم دقیق آیتم اصلی استفاده کن.</p>
           <ul>
             <li><span class="gcode">Feds</span> — <span class="gcode">Fed01.png</span> ،<span class="gcode">Fed02.png</span> ،<span class="gcode">Fed03.png</span> — لوگوی فدراسیون‌ها</li>
-            <li><span class="gcode">Belts</span> — <span class="gcode">Fed01_Texture01.png</span> ،<span class="gcode">Fed01_Texture02.png</span> — تکسچر کمربند قهرمانی هر فدراسیون/عنوان</li>
+            <li><span class="gcode">Belts</span> — <span class="gcode">Fed01_Texture01.png</span> ،<span class="gcode">Fed01_Texture02.png</span> — تکسچر کمربند قهرمانی هر فدراسیون/تایتل</li>
             <li><span class="gcode">Canvas</span> — <span class="gcode">canvas_logo04.png</span> ،<span class="gcode">canvas05.png</span> — کف رینگ و لوگوی کف رینگ</li>
             <li><span class="gcode">Apron</span> — <span class="gcode">apron_logo27.png</span> ،<span class="gcode">apron_white.png</span> — تکسچر/لوگوی پیش‌بند رینگ</li>
           </ul>
@@ -1862,66 +1938,66 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
         </div>
 
         <div class="guide-sec">
-          <h3>توصیه‌های عکس</h3>
+          <h3>چند تا نکته برای عکسا</h3>
           <ul>
             <li>تا جایی که ممکنه از همون ابعاد تکسچر اصلی استفاده کن.</li>
             <li>برای شفافیت از <span class="gcode">PNG</span> استفاده کن.</li>
-            <li>از عکس‌های خیلی بزرگ خودداری کن. هم‌اندازه بودن با سایز اصلی بهترین عملکرد رو می‌ده.</li>
-            <li>اگه یه تکسچر سفید دیده شد، ممکنه فایل خراب، پشتیبانی‌نشده یا با اسم اشتباه باشه.</li>
+            <li>عکسای خیلی بزرگ نذار. اگه هم‌اندازه‌ی سایز اصلی باشه، بهترین عملکرد رو می‌گیری.</li>
+            <li>اگه یه تکسچر سفید دیدی، احتمالاً فایل خرابه، پشتیبانی نمی‌شه یا اسمش اشتباهه.</li>
           </ul>
         </div>
 
         <div class="guide-sec">
-          <h3>عیب‌یابی</h3>
+          <h3>اگه یه جای کار گیر کرد</h3>
           <ul>
-            <li><b>اسلات جدید ظاهر می‌شه ولی تکسچر سفیده</b> — شماره اسلات شناسایی شده ولی عکس لود نشده. راه‌حل: فرمت <span class="gcode">PNG/JPG</span>، اسم فایل و ابعاد عکس رو بررسی کن. یه <span class="gcode">PNG</span> کوچک‌تر رو امتحان کن.</li>
-            <li><b>اسلات آهنگ ظاهر می‌شه ولی موزیک پخش نمی‌شه</b> — فایل <span class="gcode">MP3</span> نیست یا اسمش اشتباهه. راه‌حل: از <span class="gcode">Theme124.mp3</span> یا <span class="gcode">Theme 124.mp3</span> یا <span class="gcode">124.mp3</span> استفاده کن.</li>
-            <li><b>اسلات تایتان‌ترون ظاهر می‌شه ولی ویدیو پخش نمی‌شه</b> — کدک <span class="gcode">MP4</span> پشتیبانی نمی‌شه یا اسم اشتباهه. راه‌حل: از <span class="gcode">26.mp4</span> با کدک ویدیویی <span class="gcode">H.264</span> و صدای <span class="gcode">AAC</span> استفاده کن.</li>
-            <li><b>لوگوی فدراسیون جایگزین نشد</b> — پوشه یا اسم اشتباهه. راه‌حل: دقیقاً از <span class="gcode">Feds/Fed01.png</span> استفاده کن.</li>
-            <li><b>بازی موقع مرور تکسچرها لگ می‌زنه</b> — عکس‌های خیلی بزرگ یا تعداد زیاد آیتم‌های سنگین. راه‌حل: تکسچرها رو به ابعاد اصلی تغییر سایز بده و عکس‌ها رو فشرده کن.</li>
-            <li><b>فایل‌ها بعد از کپی ظاهر نمی‌شن</b> — بازی لیست پوشه‌ها رو قبلاً کش کرده. راه‌حل: بازی رو ری‌استارت کن یا دوباره Asset Loader رو بزن.</li>
+            <li><b>اسلات جدید میاد ولی تکسچر سفیده</b> — یعنی شماره اسلات رو شناخته ولی عکس لود نشده. چیکار کنی: فرمت <span class="gcode">PNG/JPG</span>، اسم فایل و ابعاد عکس رو بررسی کن. یه <span class="gcode">PNG</span> کوچک‌تر رو امتحان کن.</li>
+            <li><b>اسلات آهنگ ظاهر می‌شه ولی موزیک پخش نمی‌شه</b> — فایل <span class="gcode">MP3</span> نیست یا اسمش اشتباهه. چیکار کنی: از <span class="gcode">Theme124.mp3</span> یا <span class="gcode">Theme 124.mp3</span> یا <span class="gcode">124.mp3</span> استفاده کن.</li>
+            <li><b>اسلات تایتان‌ترون ظاهر می‌شه ولی ویدیو پخش نمی‌شه</b> — کدک <span class="gcode">MP4</span> رو پشتیبانی نمی‌کنه یا اسمش اشتباهه. چیکار کنی: از <span class="gcode">26.mp4</span> با کدک ویدیویی <span class="gcode">H.264</span> و صدای <span class="gcode">AAC</span> استفاده کن.</li>
+            <li><b>لوگوی فدراسیون عوض نشد</b> — پوشه یا اسم اشتباهه. چیکار کنی: دقیقاً از <span class="gcode">Feds/Fed01.png</span> استفاده کن.</li>
+            <li><b>بازی وقتی داری تکسچرا رو می‌بینی لگ می‌زنه</b> — عکسا خیلی بزرگن یا آیتمای سنگین زیاده. چیکار کنی: سایز تکسچرا رو بکن همون ابعاد اصلی و عکسا رو فشرده کن.</li>
+            <li><b>فایل‌ها بعد از کپی کردن نمیان</b> — بازی لیست پوشه‌ها رو از قبل کش کرده. چیکار کنی: بازی رو ری‌استارت کن یا دوباره Asset Loader رو بزن.</li>
           </ul>
         </div>
 
         <div class="guide-sec">
-          <h3>بهترین روش برای پک‌های ماد</h3>
+          <h3>بهترین راه برای پکای ماد</h3>
           <ul>
             <li>فقط پوشه‌هایی رو بذار که پکت ازشون استفاده می‌کنه.</li>
-            <li>یه فایل متنی نگه دار که همه آیتم‌های تغییرکرده رو لیست کنه.</li>
-            <li>بدون بکاپ گرفتن از فایل‌ها، روی پک ماد دیگه‌ای بازنویسی نکن.</li>
-            <li>برای تست تمیز، موقتاً همه فایل‌های دیگه رو از <span class="gcode">WrestlingEmpireMods</span> بیرون ببر.</li>
+            <li>یه فایل متنی نگه دار که توش همه‌ی آیتمایی که عوض شدن لیست شده باشن.</li>
+            <li>بدون اینکه از فایل‌ها بکاپ بگیری، رو یه پک ماد دیگه بازنویسی نکن.</li>
+            <li>برای اینکه تمیز تست کنی، فعلاً همه‌ی فایلای دیگه رو از <span class="gcode">WrestlingEmpireMods</span> ببر بیرون.</li>
           </ul>
         </div>
 
         <div class="guide-sec">
-          <h3>جدول سریع نام‌گذاری</h3>
+          <h3>جدول سریع اسم‌گذاری</h3>
           <table class="gtable">
             <thead>
               <tr><th>کار</th><th>پوشه</th><th>اسم فایل</th></tr>
             </thead>
             <tbody>
-              <tr><td data-label="کار">اضافه کردن اسلات صورت 323</td><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="اسم فایل">face323.png</td></tr>
-              <tr><td data-label="کار">اضافه کردن اسلات صورت زنانه 35</td><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="اسم فایل">face_female35.png</td></tr>
-              <tr><td data-label="کار">اضافه کردن اسلات بدن 312</td><td class="ltr-cell" data-label="پوشه">Costumes/Bodies</td><td class="ltr-cell" data-label="اسم فایل">body312.png</td></tr>
-              <tr><td data-label="کار">اضافه کردن اسلات تایتان‌ترون 26</td><td class="ltr-cell" data-label="پوشه">Titantrons</td><td class="ltr-cell" data-label="اسم فایل">26.mp4</td></tr>
-              <tr><td data-label="کار">اضافه کردن اسلات آهنگ 124</td><td class="ltr-cell" data-label="پوشه">Themes</td><td class="ltr-cell" data-label="اسم فایل">Theme124.mp3</td></tr>
-              <tr><td data-label="کار">جایگزینی لوگوی فدراسیون RAW</td><td class="ltr-cell" data-label="پوشه">Feds</td><td class="ltr-cell" data-label="اسم فایل">Fed01.png</td></tr>
-              <tr><td data-label="کار">جایگزینی کمربند اصلی قهرمانی جهان</td><td class="ltr-cell" data-label="پوشه">Belts</td><td class="ltr-cell" data-label="اسم فایل">Fed01_Texture01.png</td></tr>
-              <tr><td data-label="کار">جایگزینی لوگوی کف رینگ 04</td><td class="ltr-cell" data-label="پوشه">Canvas</td><td class="ltr-cell" data-label="اسم فایل">canvas_logo04.png</td></tr>
-              <tr><td data-label="کار">جایگزینی لوگوی پیش‌بند رینگ 27</td><td class="ltr-cell" data-label="پوشه">Apron</td><td class="ltr-cell" data-label="اسم فایل">apron_logo27.png</td></tr>
+              <tr><td data-label="کار">اسلات صورت 323 رو اضافه کن</td><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="اسم فایل">face323.png</td></tr>
+              <tr><td data-label="کار">اسلات صورت زنانه 35 رو اضافه کن</td><td class="ltr-cell" data-label="پوشه">Costumes/Faces</td><td class="ltr-cell" data-label="اسم فایل">face_female35.png</td></tr>
+              <tr><td data-label="کار">اسلات بدن 312 رو اضافه کن</td><td class="ltr-cell" data-label="پوشه">Costumes/Bodies</td><td class="ltr-cell" data-label="اسم فایل">body312.png</td></tr>
+              <tr><td data-label="کار">اسلات تایتان‌ترون 26 رو اضافه کن</td><td class="ltr-cell" data-label="پوشه">Titantrons</td><td class="ltr-cell" data-label="اسم فایل">26.mp4</td></tr>
+              <tr><td data-label="کار">اسلات آهنگ 124 رو اضافه کن</td><td class="ltr-cell" data-label="پوشه">Themes</td><td class="ltr-cell" data-label="اسم فایل">Theme124.mp3</td></tr>
+              <tr><td data-label="کار">لوگوی فدراسیون RAW رو عوض کن</td><td class="ltr-cell" data-label="پوشه">Feds</td><td class="ltr-cell" data-label="اسم فایل">Fed01.png</td></tr>
+              <tr><td data-label="کار">کمربند اصلی قهرمانی جهان رو عوض کن</td><td class="ltr-cell" data-label="پوشه">Belts</td><td class="ltr-cell" data-label="اسم فایل">Fed01_Texture01.png</td></tr>
+              <tr><td data-label="کار">لوگوی کف رینگ 04 رو عوض کن</td><td class="ltr-cell" data-label="پوشه">Canvas</td><td class="ltr-cell" data-label="اسم فایل">canvas_logo04.png</td></tr>
+              <tr><td data-label="کار">لوگوی پیش‌بند رینگ 27 رو عوض کن</td><td class="ltr-cell" data-label="پوشه">Apron</td><td class="ltr-cell" data-label="اسم فایل">apron_logo27.png</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="guide-sec">
-          <h3>نکته پایانی</h3>
-          <p>آیتم‌های قابل‌اضافه بر اساس بالاترین فایل معتبر شماره‌گذاری‌شده دنبال می‌شن. آیتم‌های جایگزین فقط اسم‌های موجود رو بازنویسی می‌کنن. اگه شک داری، Asset Loader رو بزن، مسیر پوشه رو تأیید کن، یه فایل تستی اضافه کن، بازی رو ری‌استارت کن و قبل از اضافه کردن یه پک کامل، بررسی کن.</p>
+          <h3>حرف آخر</h3>
+          <p>آیتمایی که می‌شه اضافه کرد، از روی بالاترین فایل درستی که شماره داره پیدا می‌شن. آیتمای جایگزین هم فقط اسمایی که از قبل هستن رو بازنویسی می‌کنن. اگه شک داری، Asset Loader رو بزن، مسیر پوشه رو چک کن، یه فایل تستی اضافه کن، بازی رو ری‌استارت کن و قبل از اینکه یه پک کامل اضافه کنی، یه نگاه بنداز ببین درست شده یا نه.</p>
         </div>
 
         <div class="back-row">
           <a class="back-link" href="#top">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            برگشت به صفحه اصلی
+            برگرد صفحه‌ی اصلی
           </a>
         </div>
       </section>
@@ -1932,15 +2008,16 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
         <div>
           <a class="brand" href="#top" dir="ltr"><b>WR3D</b> <span>UNIVERSE</span></a>
           <div class="tagline-f">The Best Wrestling Empire Booking Chanle on Rubika</div>
-          <p>شوهای بوکینگ Wrestling Empire — نتایج و قهرمانان، همه در یک جا.</p>
+          <p>شوهای بوکینگ Wrestling Empire — نتیجه‌ها و قهرمانا، همه‌ش یه جا.</p>
         </div>
         <nav class="foot-links">
-          <a href="#results">نتایج رویدادها</a>
+          <a href="#news">اخبار یونیورس</a>
+          <a href="#results">نتایج رویداد ها</a>
           <a href="#rate">نمره به سامراسلم</a>
           <a href="#next-event">رویداد بعدی — الیمینیشن چمبر</a>
-          <a href="#champions">قهرمانان فعلی</a>
+          <a href="#champions">قهرمانای فعلی</a>
           <a href="#textures">دانلود تکسچر</a>
-          <a href="#asset-loader">آموزش کار با Asset Loader</a>
+          <a href="#asset-loader">یاد بگیر با Asset Loader کار کنی</a>
           <a href="https://rubika.ir/wr3duniverse" target="_blank" rel="noopener">کانال روبیکا — @wr3duniverse</a>
         </nav>
       </div>
@@ -1953,11 +2030,13 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
         if (track) track.innerHTML += track.innerHTML;
       })();
 
-      // Four views in one page: home, the event results page opened via
-      // #results, the textures page opened via #textures, and the Asset
-      // Loader guide opened via #asset-loader.
+      // Five views in one page: home, the news page opened via #news,
+      // the event results page opened via #results, the textures page
+      // opened via #textures, and the Asset Loader guide opened via
+      // #asset-loader.
       (function () {
         var home = document.getElementById('view-home');
+        var news = document.getElementById('view-news');
         var results = document.getElementById('view-results');
         var tex = document.getElementById('view-textures');
         var guide = document.getElementById('view-guide');
@@ -1966,21 +2045,25 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
         if (!home || !tex) return;
         function route() {
           var hash = location.hash;
-          var sub = hash === '#textures' ? tex : (hash === '#asset-loader' ? guide : (hash === '#results' ? results : null));
+          var sub = hash === '#textures' ? tex : (hash === '#asset-loader' ? guide : (hash === '#results' ? results : (hash === '#news' ? news : null)));
           home.hidden = !!sub;
           tex.hidden = sub !== tex;
           if (guide) guide.hidden = sub !== guide;
           if (results) results.hidden = sub !== results;
+          if (news) news.hidden = sub !== news;
           if (hero) hero.hidden = !!sub;
           if (ticker) ticker.hidden = !!sub;
           if (hash === '#textures') {
             document.title = 'دانلود تکسچر — WR3D Universe';
             window.scrollTo(0, 0);
           } else if (hash === '#asset-loader') {
-            document.title = 'آموزش کار با Asset Loader — WR3D Universe';
+            document.title = 'چطور با Asset Loader کار کنیم؟ — WR3D Universe';
             window.scrollTo(0, 0);
           } else if (hash === '#results') {
-            document.title = 'نتایج رویدادها — WR3D Universe';
+            document.title = 'نتایج رویداد ها — WR3D Universe';
+            window.scrollTo(0, 0);
+          } else if (hash === '#news') {
+            document.title = 'اخبار یونیورس — WR3D Universe';
             window.scrollTo(0, 0);
           } else {
             document.title = 'WR3D Universe';
@@ -2195,6 +2278,43 @@ WrestlingEmpireMods\Apron\apron_logo27.png</div>
           });
         }
         loadCounts(1);
+      })();
+
+      // Countdown to the Wrestling Empire Legacy 2 release:
+      // 15 December 2026 (۲۴ آذر ۱۴۰۵), 15:00 Tehran time.
+      (function () {
+        var daysEl = document.getElementById('cdDays');
+        if (!daysEl) return;
+        var hoursEl = document.getElementById('cdHours');
+        var minutesEl = document.getElementById('cdMinutes');
+        var secondsEl = document.getElementById('cdSeconds');
+        var caption = document.getElementById('cdCaption');
+        var target = new Date('2026-12-15T15:00:00+03:30').getTime();
+        var FA_DIGITS = '۰۱۲۳۴۵۶۷۸۹';
+        function fa2(n) {
+          var s = String(n);
+          if (s.length < 2) s = '0' + s;
+          return s.replace(/[0-9]/g, function (c) { return FA_DIGITS.charAt(+c); });
+        }
+        var timer = null;
+        function tick() {
+          var diff = target - Date.now();
+          if (diff <= 0) {
+            daysEl.textContent = fa2(0);
+            hoursEl.textContent = fa2(0);
+            minutesEl.textContent = fa2(0);
+            secondsEl.textContent = fa2(0);
+            if (caption) caption.innerHTML = '<span class="en" dir="ltr">Wrestling Empire Legacy 2</span> اومد!';
+            if (timer) clearInterval(timer);
+            return;
+          }
+          daysEl.textContent = fa2(Math.floor(diff / 86400000));
+          hoursEl.textContent = fa2(Math.floor(diff / 3600000) % 24);
+          minutesEl.textContent = fa2(Math.floor(diff / 60000) % 60);
+          secondsEl.textContent = fa2(Math.floor(diff / 1000) % 60);
+        }
+        tick();
+        timer = setInterval(tick, 1000);
       })();
 
     </script>
